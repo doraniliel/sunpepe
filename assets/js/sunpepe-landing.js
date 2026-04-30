@@ -7,6 +7,9 @@
  * Mobile   — all layers shown immediately; panels fade in on scroll.
  * Reduced  — GSAP never runs; CSS opacity:1 !important shows everything.
  * No-JS    — <noscript> style in <head> makes all layers visible.
+ *
+ * Isolation: only SUN PEPE's own ScrollTrigger instances are ever killed.
+ * ScrollTrigger.killAll() is never called.
  */
 ( function () {
     'use strict';
@@ -43,6 +46,33 @@
     };
     var ctaReveal = root.querySelector( '.sp-cta-reveal' );
 
+    /* ── SUN PEPE's own GSAP instances ──────────────────────────────────── */
+    /*
+     * spTriggers: standalone ScrollTrigger instances (pin, panel highlights,
+     *             mobile panel tweens' embedded STs).
+     * spTimeline: the desktop scrubbed timeline. Calling .kill() on a GSAP
+     *             timeline also kills its embedded ScrollTrigger automatically.
+     *
+     * killOwnTriggers() replaces ScrollTrigger.killAll() — it only tears down
+     * what this script created, leaving any other plugin's instances untouched.
+     */
+    var spTriggers = [];
+    var spTimeline = null;
+
+    function killOwnTriggers() {
+        spTriggers.forEach( function ( st ) {
+            if ( st && typeof st.kill === 'function' ) {
+                st.kill();
+            }
+        } );
+        spTriggers = [];
+
+        if ( spTimeline ) {
+            spTimeline.kill(); // also kills its embedded ScrollTrigger
+            spTimeline = null;
+        }
+    }
+
     /* ── Desktop vs mobile breakpoint ───────────────────────────────────── */
     var DESKTOP_BP = 900;
 
@@ -57,8 +87,9 @@
         initDesktop();
     }
 
-    /* Reinitialise on resize crossing the breakpoint (debounced) */
-    var lastMode = isMobile() ? 'mobile' : 'desktop';
+    /* Reinitialise on resize crossing the breakpoint (debounced).
+       Only SUN PEPE's own triggers are killed — no global cleanup. */
+    var lastMode    = isMobile() ? 'mobile' : 'desktop';
     var resizeTimer;
     window.addEventListener( 'resize', function () {
         clearTimeout( resizeTimer );
@@ -67,7 +98,7 @@
             var newMode   = nowMobile ? 'mobile' : 'desktop';
             if ( newMode !== lastMode ) {
                 lastMode = newMode;
-                ScrollTrigger.killAll();
+                killOwnTriggers();
                 if ( nowMobile ) {
                     showAllLayers();
                     initMobile();
@@ -89,18 +120,18 @@
 
         hideAnimatedLayers();
 
-        /* Pin stage with GSAP to stay in sync with GSAP's ScrollTrigger.
-           pinSpacing:false because the panels column already provides height. */
-        ScrollTrigger.create( {
+        /* Pin stage — stored so we can kill it on breakpoint switch */
+        var pinST = ScrollTrigger.create( {
             trigger   : scene,
             start     : 'top top',
             end       : 'bottom bottom',
             pin       : stage,
             pinSpacing: false,
         } );
+        spTriggers.push( pinST );
 
-        /* Scrubbed timeline — one unit per beat, 7 beats total */
-        var tl = gsap.timeline( {
+        /* Scrubbed timeline — killing spTimeline also kills its embedded ST */
+        spTimeline = gsap.timeline( {
             scrollTrigger: {
                 trigger: scene,
                 start  : 'top top',
@@ -109,8 +140,8 @@
             },
         } );
 
-        /* Beat 1 — Dough appears (scale up from centre) */
-        tl.to( layers.dough, {
+        /* Beat 1 — Dough appears */
+        spTimeline.to( layers.dough, {
             opacity : 1,
             scale   : 1,
             duration: 1,
@@ -118,26 +149,26 @@
         }, 0 );
 
         /* Beat 2 — Mascot drops in from above */
-        tl.fromTo( layers.mascot,
+        spTimeline.fromTo( layers.mascot,
             { opacity: 0, y: -36 },
             { opacity: 1, y: 0, duration: 1, ease: 'back.out(1.4)' },
         1 );
 
         /* Beat 3 — Sauce spreads */
-        tl.to( layers.sauce, {
+        spTimeline.to( layers.sauce, {
             opacity : 1,
             duration: 1,
             ease    : 'power1.inOut',
         }, 2 );
 
         /* Beat 4 — Mozzarella falls */
-        tl.fromTo( layers.mozz,
+        spTimeline.fromTo( layers.mozz,
             { opacity: 0, y: 18 },
             { opacity: 1, y: 0, duration: 1, ease: 'power2.out' },
         3 );
 
         /* Beat 5 — Vegan toppings land */
-        tl.to( layers.toppings, {
+        spTimeline.to( layers.toppings, {
             opacity : 1,
             scale   : 1,
             duration: 1,
@@ -145,7 +176,7 @@
         }, 4 );
 
         /* Beat 6 — Glow ring: pizza complete */
-        tl.to( layers.glow, {
+        spTimeline.to( layers.glow, {
             opacity : 1,
             duration: 0.8,
             ease    : 'power1.out',
@@ -153,20 +184,21 @@
 
         /* Beat 7 — CTA reveal */
         if ( ctaReveal ) {
-            tl.fromTo( ctaReveal,
+            spTimeline.fromTo( ctaReveal,
                 { opacity: 0, y: 16 },
                 { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
             5.4 );
         }
 
-        /* Active-panel highlight (adds .is-active while panel is centred) */
+        /* Active-panel highlight — each instance stored for scoped cleanup */
         panelEls.forEach( function ( panel ) {
-            ScrollTrigger.create( {
+            var st = ScrollTrigger.create( {
                 trigger    : panel,
                 start      : 'top 55%',
                 end        : 'bottom 45%',
                 toggleClass: { targets: panel, className: 'is-active' },
             } );
+            spTriggers.push( st );
         } );
     }
 
@@ -179,17 +211,21 @@
         showAllLayers();
 
         panelEls.forEach( function ( panel ) {
-            gsap.from( panel, {
+            var tween = gsap.from( panel, {
                 opacity : 0,
                 y       : 22,
                 duration: 0.55,
                 ease    : 'power2.out',
                 scrollTrigger: {
-                    trigger    : panel,
-                    start      : 'top 88%',
+                    trigger      : panel,
+                    start        : 'top 88%',
                     toggleActions: 'play none none none',
                 },
             } );
+            /* Store the embedded ST so it's killed on breakpoint switch */
+            if ( tween && tween.scrollTrigger ) {
+                spTriggers.push( tween.scrollTrigger );
+            }
         } );
     }
 
