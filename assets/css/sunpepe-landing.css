@@ -359,16 +359,16 @@
     justify-content: center;
 }
 
-/* Desktop: CSS sticky so stage stays visible while panels scroll */
+/* Desktop: GSAP handles pinning via ScrollTrigger.create({ pin: stage }).
+   position:sticky was removed because it conflicts with GSAP's pin
+   mechanism — both would compete to control the element's position.
+   No-JS desktop: stage scrolls with the page (content still visible). */
 @media (min-width: 900px) {
     .sunpepe-landing__animation-stage {
         width: 46%;
         max-width: none;
         min-height: 100vh;
         padding: 0;
-        position: sticky;
-        top: 0;
-        /* GSAP will take over pinning; sticky is the no-JS fallback */
     }
 }
 
@@ -387,7 +387,9 @@
     }
 }
 
-.sp-pizza-svg {
+/* Scope all .sp-* selectors under .sunpepe-landing to prevent
+   bleed onto other plugins or themes that share class names. */
+.sunpepe-landing .sp-pizza-svg {
     width: 100%;
     height: auto;
     overflow: visible;
@@ -400,21 +402,23 @@
 
 /* Hidden by default — JS animates them in on scroll.
    Reduced-motion and noscript fallbacks below restore visibility. */
-.sp-layer {
+.sunpepe-landing .sp-layer {
     opacity: 0;
 }
 
 /* SVG transform-box so scale animations use each element's own center */
-.sp-layer--dough,
-.sp-layer--sauce,
-.sp-layer--toppings {
+.sunpepe-landing .sp-layer--dough,
+.sunpepe-landing .sp-layer--sauce,
+.sunpepe-landing .sp-layer--toppings {
     transform-box: fill-box;
     transform-origin: center center;
 }
 
-/* CTA inside panel 6 — starts hidden; JS fades it in (beat 7) */
-.sp-cta-reveal {
+/* CTA inside panel 6 — starts hidden; JS fades it in (beat 7).
+   pointer-events:none prevents keyboard/mouse access while invisible. */
+.sunpepe-landing .sp-cta-reveal {
     opacity: 0;
+    pointer-events: none;
 }
 
 /* ── Panels column ────────────────────────────────────────────────────────── */
@@ -469,7 +473,7 @@
 
 /* ── Panel content ────────────────────────────────────────────────────────── */
 
-.sp-beat-label {
+.sunpepe-landing .sp-beat-label {
     display: block;
     font-size: 0.65rem;
     font-weight: 700;
@@ -488,11 +492,15 @@
 }
 
 /* ── Reduced-motion fallback ─────────────────────────────────────────────── */
-/* Show all pizza layers in final state; no GSAP runs (checked in JS). */
+/* Show all pizza layers in final state; no GSAP runs (checked in JS).
+   Also restore pointer-events on the CTA which starts at none. */
 @media (prefers-reduced-motion: reduce) {
-    .sp-layer,
-    .sp-cta-reveal {
+    .sunpepe-landing .sp-layer,
+    .sunpepe-landing .sp-cta-reveal {
         opacity: 1 !important;
+    }
+    .sunpepe-landing .sp-cta-reveal {
+        pointer-events: auto !important;
     }
 }
 

@@ -116,7 +116,7 @@
        CSS position:sticky keeps the stage visible throughout.
        ════════════════════════════════════════════════════════════════════════ */
     function initDesktop() {
-        if ( ! scene || ! panels ) { return; }
+        if ( ! scene || ! panels || ! stage ) { return; }
 
         hideAnimatedLayers();
 
@@ -182,11 +182,11 @@
             ease    : 'power1.out',
         }, 5 );
 
-        /* Beat 7 — CTA reveal */
+        /* Beat 7 — CTA reveal; restore pointer-events so it becomes clickable */
         if ( ctaReveal ) {
             spTimeline.fromTo( ctaReveal,
-                { opacity: 0, y: 16 },
-                { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+                { opacity: 0, y: 16, pointerEvents: 'none' },
+                { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.7, ease: 'power2.out' },
             5.4 );
         }
 
@@ -237,7 +237,7 @@
         var all = root.querySelectorAll( '.sp-layer' );
         gsap.set( all, { opacity: 1, y: 0, scale: 1 } );
         if ( ctaReveal ) {
-            gsap.set( ctaReveal, { opacity: 1, y: 0 } );
+            gsap.set( ctaReveal, { opacity: 1, y: 0, pointerEvents: 'auto' } );
         }
     }
 

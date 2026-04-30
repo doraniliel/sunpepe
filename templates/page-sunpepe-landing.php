@@ -243,30 +243,31 @@ $static_menu = [
                             <circle cx="191" cy="140" r="3" fill="#787858"/>
                         </g>
 
-                        <!-- Beat 2: Red pepper mascot placeholder (SUN PEPE character) -->
-                        <g class="sp-layer sp-layer--mascot"
-                           transform="translate(222,44)">
-                            <!-- Stem -->
-                            <rect x="-5" y="-16" width="9" height="16" rx="3"
+                        <!-- Beat 2: Red pepper mascot placeholder (SUN PEPE character).
+                             All coordinates are absolute (no transform attribute) so the
+                             reduced-motion CSS rule "transform:none !important" cannot
+                             displace this element from its intended position. -->
+                        <g class="sp-layer sp-layer--mascot">
+                            <!-- Stem (absolute coords: local origin was translate(222,44)) -->
+                            <rect x="217" y="28" width="9" height="16" rx="3"
                                   fill="#27ae60"/>
-                            <rect x="4" y="-22" width="7" height="12" rx="3"
-                                  fill="#27ae60"
-                                  transform="rotate(30,4,-22)"/>
+                            <rect x="226" y="22" width="7" height="12" rx="3"
+                                  fill="#27ae60"/>
                             <!-- Body -->
-                            <ellipse cx="0" cy="28" rx="26" ry="36"
+                            <ellipse cx="222" cy="72" rx="26" ry="36"
                                      fill="#e03838"/>
                             <!-- Shine -->
-                            <ellipse cx="-9" cy="12" rx="7" ry="10"
+                            <ellipse cx="213" cy="56" rx="7" ry="10"
                                      fill="rgba(255,255,255,0.22)"/>
                             <!-- Eyes -->
-                            <circle cx="-9"  cy="20" r="5"   fill="white"/>
-                            <circle cx="9"   cy="20" r="5"   fill="white"/>
-                            <circle cx="-8"  cy="21" r="2.5" fill="#1a1a1a"/>
-                            <circle cx="10"  cy="21" r="2.5" fill="#1a1a1a"/>
-                            <circle cx="-6"  cy="20" r="1"   fill="white"/>
-                            <circle cx="12"  cy="20" r="1"   fill="white"/>
+                            <circle cx="213" cy="64" r="5"   fill="white"/>
+                            <circle cx="231" cy="64" r="5"   fill="white"/>
+                            <circle cx="214" cy="65" r="2.5" fill="#1a1a1a"/>
+                            <circle cx="232" cy="65" r="2.5" fill="#1a1a1a"/>
+                            <circle cx="216" cy="64" r="1"   fill="white"/>
+                            <circle cx="234" cy="64" r="1"   fill="white"/>
                             <!-- Smile -->
-                            <path d="M -10 33 Q 0 42 10 33"
+                            <path d="M 212 77 Q 222 86 232 77"
                                   stroke="#1a1a1a" stroke-width="2.5"
                                   fill="none" stroke-linecap="round"/>
                         </g>
