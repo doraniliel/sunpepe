@@ -7,21 +7,76 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+/* ── Gather settings (safe defaults match the original hardcoded content) ────── */
+
+$business_name          = sunpepe_get( 'business_name',          'SUN PEPE' );
+$phone_display          = sunpepe_get( 'phone_display',          '050-907-7774' );
+$phone_tel              = sunpepe_get( 'phone_tel',              '+972509077774' );
+$address                = sunpepe_get( 'address',                'הרצל 71, רמת גן' );
+$kosher_label           = sunpepe_get( 'kosher_label',           'כשר' );
+$waze_url               = sunpepe_get( 'waze_url',               'https://waze.com/ul?ll=32.086202,34.814943&navigate=yes&zoom=16' );
+$google_maps_url        = sunpepe_get( 'google_maps_url',        'https://www.google.com/maps?q=32.086202,34.814943' );
+$hero_headline          = sunpepe_get( 'hero_headline',          'פיצה חמה, כשרה, עם אופי של SUN PEPE' );
+$hero_subheadline       = sunpepe_get( 'hero_subheadline',       'פיצרייה פרימיום ברמת גן — לאכילה במקום ולאיסוף עצמי, עם בצק, גבינה ותוספות שעושות חשק להתקשר עכשיו.' );
+$primary_cta_label      = sunpepe_get( 'primary_cta_label',      'התקשרו להזמין כעת' );
+$sticky_cta_label       = sunpepe_get( 'sticky_mobile_cta_label','התקשרו כעת' );
+$hours_sun_thu          = sunpepe_get( 'hours_sun_thu',          '10:00–00:00' );
+$hours_fri              = sunpepe_get( 'hours_fri',              '10:00–15:00' );
+$final_cta_headline     = sunpepe_get( 'final_cta_headline',     'הפיצה מוכנה. אתם רק צריכים להתקשר.' );
+$final_cta_details      = sunpepe_get( 'final_cta_details',      'SUN PEPE — הרצל 71, רמת גן | כשר | איסוף עצמי וישיבה במקום' );
+
+/* ── Dynamic menu data (falls back to static list when CPT has no items) ─────── */
+
+$grouped_items = Sunpepe_Menu_Post_Type::get_grouped_items();
+$use_dynamic_menu = ! empty( $grouped_items );
+
+/* ── Static fallback menu (shown when no CPT items are published yet) ────────── */
+
+$static_menu = [
+    'פיצות' => [
+        'פיצה קלאסית',
+        'פיצה מוצרלה',
+        'פיצה שמנת / אלפרדו',
+        'פיצה פסטו',
+    ],
+    'סלטים' => [
+        'סלט יווני',
+        'סלט טונה',
+        'סלט סאן פפה',
+    ],
+    'מאפים' => [
+        'פוקצ׳ה',
+        'לחם שום',
+        'מלוואח פיצה',
+    ],
+    'פסטות' => [
+        'פסטה שמנת ופטריות',
+        'פסטה רוזה',
+        'פסטה פסטו',
+    ],
+    'שתייה' => [
+        'בקבוק שתייה',
+    ],
+    'תוספות' => [
+        'תוספת לפיצה',
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> dir="rtl">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUN PEPE | פיצה כשרה, רמת גן</title>
+    <title><?php echo esc_html( $business_name ); ?> | פיצה כשרה, רמת גן</title>
 
     <!-- Restaurant structured data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Restaurant",
-        "name": "SUN PEPE",
-        "telephone": "+972509077774",
+        "name": <?php echo wp_json_encode( $business_name ); ?>,
+        "telephone": <?php echo wp_json_encode( $phone_tel ); ?>,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "הרצל 71",
@@ -53,10 +108,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- ── Sticky mobile CTA (visible only on mobile, fixed to bottom) ─────────── -->
 <div class="sunpepe-landing-sticky-cta" role="complementary" aria-label="כפתור חיוג מהיר">
-    <a href="tel:+972509077774"
+    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
        class="sunpepe-landing-sticky-cta__btn"
-       aria-label="חייגו אלינו עכשיו: 050-907-7774">
-        התקשרו כעת
+       aria-label="חייגו אלינו עכשיו: <?php echo esc_attr( $phone_display ); ?>">
+        <?php echo esc_html( $sticky_cta_label ); ?>
     </a>
 </div>
 
@@ -68,42 +123,42 @@ if ( ! defined( 'ABSPATH' ) ) {
     <section class="sunpepe-landing__hero" aria-label="עמוד הבית">
         <div class="sunpepe-landing__container">
 
-            <div class="sunpepe-landing__logo" aria-label="לוגו SUN PEPE">
-                <span class="sunpepe-landing__logo-text">SUN PEPE</span>
+            <div class="sunpepe-landing__logo" aria-label="לוגו <?php echo esc_attr( $business_name ); ?>">
+                <span class="sunpepe-landing__logo-text"><?php echo esc_html( $business_name ); ?></span>
             </div>
 
             <h1 class="sunpepe-landing__headline">
-                פיצה חמה, כשרה, עם אופי של SUN PEPE
+                <?php echo esc_html( $hero_headline ); ?>
             </h1>
 
             <p class="sunpepe-landing__subheadline">
-                פיצרייה פרימיום ברמת גן — לאכילה במקום ולאיסוף עצמי, עם בצק, גבינה ותוספות שעושות חשק להתקשר עכשיו.
+                <?php echo esc_html( $hero_subheadline ); ?>
             </p>
 
             <div class="sunpepe-landing__badges" role="list">
-                <span class="sunpepe-landing__badge" role="listitem">כשר</span>
+                <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $kosher_label ); ?></span>
                 <span class="sunpepe-landing__badge" role="listitem">ישיבה במקום</span>
                 <span class="sunpepe-landing__badge" role="listitem">איסוף עצמי</span>
-                <span class="sunpepe-landing__badge" role="listitem">הרצל 71, רמת גן</span>
+                <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $address ); ?></span>
             </div>
 
             <div class="sunpepe-landing__hero-ctas">
-                <a href="tel:+972509077774"
+                <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
                    class="sunpepe-landing__cta-primary"
-                   aria-label="חייגו אלינו: 050-907-7774">
-                    התקשרו להזמין כעת
+                   aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
+                    <?php echo esc_html( $primary_cta_label ); ?>
                 </a>
-                <p class="sunpepe-landing__phone-inline" dir="ltr">050-907-7774</p>
+                <p class="sunpepe-landing__phone-inline" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
             </div>
 
             <div class="sunpepe-landing__hero-secondary-ctas">
-                <a href="https://waze.com/ul?ll=32.086202,34.814943&navigate=yes&zoom=16"
+                <a href="<?php echo esc_url( $waze_url ); ?>"
                    class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--waze"
                    target="_blank" rel="noopener noreferrer"
                    aria-label="נווט אלינו ב-Waze">
                     נווטו ב-Waze
                 </a>
-                <a href="https://www.google.com/maps?q=32.086202,34.814943"
+                <a href="<?php echo esc_url( $google_maps_url ); ?>"
                    class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--maps"
                    target="_blank" rel="noopener noreferrer"
                    aria-label="נווט אלינו ב-Google Maps">
@@ -144,7 +199,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="2">
-                    <p class="sunpepe-landing__animation-copy">SUN PEPE נכנס לעניינים</p>
+                    <p class="sunpepe-landing__animation-copy"><?php echo esc_html( $business_name ); ?> נכנס לעניינים</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="3">
@@ -161,8 +216,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 <div class="sunpepe-landing__animation-panel" data-beat="6">
                     <p class="sunpepe-landing__animation-copy">הפיצה מוכנה — עכשיו רק להתקשר</p>
-                    <a href="tel:+972509077774" class="sunpepe-landing__cta-primary">
-                        התקשרו להזמין כעת
+                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>" class="sunpepe-landing__cta-primary">
+                        <?php echo esc_html( $primary_cta_label ); ?>
                     </a>
                 </div>
 
@@ -172,9 +227,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 3 — MENU HIGHLIGHTS
-         Static placeholder. Phase 4 will wire this to ACF / CPT data.
-         All prices are 0 until staff update them in WordPress admin.
+         SECTION 3 — MENU
+         Shows CPT items when staff have added them; static fallback otherwise.
+         All prices start at ₪0 and are edited in WordPress admin → פריטי תפריט.
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__menu" id="sunpepe-menu" aria-label="תפריט">
         <div class="sunpepe-landing__container">
@@ -184,107 +239,57 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <div class="sunpepe-landing__menu-categories">
 
-                <!-- פיצות -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">פיצות</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פיצה קלאסית</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פיצה מוצרלה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פיצה שמנת / אלפרדו</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פיצה פסטו</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
+            <?php if ( $use_dynamic_menu ) : ?>
 
-                <!-- סלטים -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">סלטים</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">סלט יווני</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">סלט טונה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">סלט סאן פפה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
+                <?php foreach ( $grouped_items as $group ) : ?>
+                    <div class="sunpepe-landing__menu-category">
+                        <h3 class="sunpepe-landing__menu-category-title">
+                            <?php echo esc_html( $group['name'] ); ?>
+                        </h3>
+                        <ul class="sunpepe-landing__menu-items" role="list">
+                            <?php foreach ( $group['items'] as $item ) :
+                                $price = sunpepe_get_price( $item->ID );
+                                $desc  = sunpepe_get_description( $item->ID );
+                            ?>
+                            <li class="sunpepe-landing__menu-item">
+                                <span class="sunpepe-landing__menu-item-name">
+                                    <?php echo esc_html( $item->post_title ); ?>
+                                    <?php if ( $desc ) : ?>
+                                        <span class="sunpepe-landing__menu-item-desc">
+                                            <?php echo esc_html( $desc ); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </span>
+                                <span class="sunpepe-landing__menu-item-price" dir="ltr">
+                                    ₪<?php echo esc_html( $price ); ?>
+                                </span>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
 
-                <!-- מאפים -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">מאפים</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פוקצ׳ה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">לחם שום</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">מלוואח פיצה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
+            <?php else : /* Static fallback — shown before staff add CPT items */ ?>
 
-                <!-- פסטות -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">פסטות</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פסטה שמנת ופטריות</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פסטה רוזה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">פסטה פסטו</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
+                <?php foreach ( $static_menu as $category_name => $item_names ) : ?>
+                    <div class="sunpepe-landing__menu-category">
+                        <h3 class="sunpepe-landing__menu-category-title">
+                            <?php echo esc_html( $category_name ); ?>
+                        </h3>
+                        <ul class="sunpepe-landing__menu-items" role="list">
+                            <?php foreach ( $item_names as $item_name ) : ?>
+                            <li class="sunpepe-landing__menu-item">
+                                <span class="sunpepe-landing__menu-item-name">
+                                    <?php echo esc_html( $item_name ); ?>
+                                </span>
+                                <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
 
-                <!-- שתייה -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">שתייה</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">בקבוק שתייה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- תוספות -->
-                <div class="sunpepe-landing__menu-category">
-                    <h3 class="sunpepe-landing__menu-category-title">תוספות</h3>
-                    <ul class="sunpepe-landing__menu-items" role="list">
-                        <li class="sunpepe-landing__menu-item">
-                            <span class="sunpepe-landing__menu-item-name">תוספת לפיצה</span>
-                            <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
-                        </li>
-                    </ul>
-                </div>
+            <?php endif; ?>
 
             </div><!-- /.menu-categories -->
         </div>
@@ -295,12 +300,12 @@ if ( ! defined( 'ABSPATH' ) ) {
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__why" aria-label="למה SUN PEPE">
         <div class="sunpepe-landing__container">
-            <h2 class="sunpepe-landing__section-title">למה SUN PEPE?</h2>
+            <h2 class="sunpepe-landing__section-title">למה <?php echo esc_html( $business_name ); ?>?</h2>
             <div class="sunpepe-landing__why-grid">
 
                 <div class="sunpepe-landing__why-card">
                     <span class="sunpepe-landing__why-icon" aria-hidden="true">✡</span>
-                    <h3>כשר</h3>
+                    <h3><?php echo esc_html( $kosher_label ); ?></h3>
                     <p>פיצה כשרה, חמה ומדויקת</p>
                 </div>
 
@@ -313,7 +318,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="sunpepe-landing__why-card">
                     <span class="sunpepe-landing__why-icon" aria-hidden="true">◎</span>
                     <h3>במרכז רמת גן</h3>
-                    <p>הרצל 71, קרוב ונגיש למרכז ישראל</p>
+                    <p><?php echo esc_html( $address ); ?>, קרוב ונגיש למרכז ישראל</p>
                 </div>
 
                 <div class="sunpepe-landing__why-card">
@@ -335,28 +340,28 @@ if ( ! defined( 'ABSPATH' ) ) {
             <h2 class="sunpepe-landing__section-title">מיקום ושעות פתיחה</h2>
 
             <address class="sunpepe-landing__address">
-                הרצל 71, רמת גן
+                <?php echo esc_html( $address ); ?>
             </address>
 
             <dl class="sunpepe-landing__hours">
                 <dt>ראשון–חמישי</dt>
-                <dd>10:00–00:00</dd>
+                <dd><?php echo esc_html( $hours_sun_thu ); ?></dd>
                 <dt>שישי</dt>
-                <dd>10:00–15:00</dd>
+                <dd><?php echo esc_html( $hours_fri ); ?></dd>
             </dl>
 
             <div class="sunpepe-landing__location-ctas">
-                <a href="https://waze.com/ul?ll=32.086202,34.814943&navigate=yes&zoom=16"
+                <a href="<?php echo esc_url( $waze_url ); ?>"
                    class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--waze"
                    target="_blank" rel="noopener noreferrer">
                     נווטו עם Waze
                 </a>
-                <a href="https://www.google.com/maps?q=32.086202,34.814943"
+                <a href="<?php echo esc_url( $google_maps_url ); ?>"
                    class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--maps"
                    target="_blank" rel="noopener noreferrer">
                     פתחו ב-Google Maps
                 </a>
-                <a href="tel:+972509077774"
+                <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
                    class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--call">
                     התקשרו להזמין
                 </a>
@@ -372,18 +377,18 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="sunpepe-landing__container">
 
             <h2 class="sunpepe-landing__final-cta-headline">
-                הפיצה מוכנה. אתם רק צריכים להתקשר.
+                <?php echo esc_html( $final_cta_headline ); ?>
             </h2>
 
-            <a href="tel:+972509077774"
+            <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
                class="sunpepe-landing__cta-primary sunpepe-landing__cta-large">
-                התקשרו להזמין כעת
+                <?php echo esc_html( $primary_cta_label ); ?>
             </a>
 
-            <p class="sunpepe-landing__phone-display" dir="ltr">050-907-7774</p>
+            <p class="sunpepe-landing__phone-display" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
 
             <p class="sunpepe-landing__final-cta-details">
-                SUN PEPE — הרצל 71, רמת גן | כשר | איסוף עצמי וישיבה במקום
+                <?php echo esc_html( $final_cta_details ); ?>
             </p>
 
         </div>

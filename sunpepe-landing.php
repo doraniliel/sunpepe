@@ -11,14 +11,73 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'SUNPEPE_VERSION',      '0.1.0' );
+define( 'SUNPEPE_VERSION',      '0.2.0' );
 define( 'SUNPEPE_PLUGIN_DIR',   plugin_dir_path( __FILE__ ) );
 define( 'SUNPEPE_PLUGIN_URL',   plugin_dir_url( __FILE__ ) );
 define( 'SUNPEPE_TEMPLATE_KEY', 'sunpepe-landing' );
 
+/* ── Load includes ─────────────────────────────────────────────────────────── */
+
+require_once SUNPEPE_PLUGIN_DIR . 'includes/class-settings-page.php';
+require_once SUNPEPE_PLUGIN_DIR . 'includes/class-menu-post-type.php';
+
+Sunpepe_Settings_Page::init();
+Sunpepe_Menu_Post_Type::init();
+
+// ACF fields are only registered when ACF plugin is active.
+add_action( 'plugins_loaded', function () {
+    if ( class_exists( 'ACF' ) ) {
+        require_once SUNPEPE_PLUGIN_DIR . 'includes/class-acf-fields.php';
+        Sunpepe_ACF_Fields::init();
+    }
+} );
+
+/* ── Template + asset hooks ─────────────────────────────────────────────────── */
+
 add_filter( 'theme_page_templates', 'sunpepe_register_page_template' );
 add_filter( 'template_include',     'sunpepe_load_page_template' );
 add_action( 'wp_enqueue_scripts',   'sunpepe_enqueue_assets' );
+
+/* ── Template helper functions ──────────────────────────────────────────────── */
+
+/**
+ * Get a global landing-page setting, with a hard-coded default fallback.
+ *
+ * @param string $key     Setting key (e.g. 'hero_headline').
+ * @param string $default Value shown when the setting is empty.
+ * @return string
+ */
+function sunpepe_get( $key, $default = '' ) {
+    return Sunpepe_Settings_Page::get( $key, $default );
+}
+
+/**
+ * Get a menu item price (ACF field). Returns 0 when ACF is not active.
+ *
+ * @param int $post_id WP_Post ID of a sunpepe_menu_item.
+ * @return int
+ */
+function sunpepe_get_price( $post_id ) {
+    if ( function_exists( 'get_field' ) ) {
+        $price = get_field( 'menu_price', $post_id );
+        return is_numeric( $price ) ? (int) $price : 0;
+    }
+    return 0;
+}
+
+/**
+ * Get a menu item description (ACF field). Returns '' when ACF is not active.
+ *
+ * @param int $post_id WP_Post ID of a sunpepe_menu_item.
+ * @return string
+ */
+function sunpepe_get_description( $post_id ) {
+    if ( function_exists( 'get_field' ) ) {
+        $desc = get_field( 'menu_description', $post_id );
+        return $desc ? $desc : '';
+    }
+    return '';
+}
 
 function sunpepe_register_page_template( $templates ) {
     $templates[ SUNPEPE_TEMPLATE_KEY ] = __( 'SUN PEPE Landing Page', 'sunpepe-landing' );
