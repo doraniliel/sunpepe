@@ -319,106 +319,181 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SECTION 2 — ANIMATION PLACEHOLDER
+   SECTION 2 — SCROLL ANIMATION (Phase 6)
+   Desktop: side-by-side flex row; stage is CSS-sticky; panels scroll.
+   Mobile:  column layout; pizza shown statically above panels.
    ═══════════════════════════════════════════════════════════════════════════ */
+
 .sunpepe-landing__animation {
     background: linear-gradient(180deg, var(--sp-navy) 0%, var(--sp-navy-mid) 50%, var(--sp-navy) 100%);
-    padding: 5rem 0;
+    /* Section height determined entirely by the panels column */
 }
 
+/* ── Scene layout ─────────────────────────────────────────────────────────── */
+
 .sunpepe-landing__animation-scene {
-    max-width: 1100px;
-    margin-inline: auto;
-    padding-inline: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
 }
 
 @media (min-width: 900px) {
     .sunpepe-landing__animation-scene {
-        flex-direction: row;
+        flex-direction: row;    /* RTL: stage on right, panels on left  */
         align-items: flex-start;
-        justify-content: center;
-        gap: 4rem;
-    }
-
-    .sunpepe-landing__animation-stage {
-        position: sticky;
-        top: 50%;
-        transform: translateY(-50%);
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: 2rem;
     }
 }
+
+/* ── Animation stage (pizza visualization) ───────────────────────────────── */
 
 .sunpepe-landing__animation-stage {
     width: 100%;
-    max-width: 360px;
+    max-width: 380px;
+    padding: 3rem 1.5rem 1.5rem;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sunpepe-landing__pizza-placeholder {
-    border: 1px dashed rgba(255, 159, 28, 0.3);
-    border-radius: var(--sp-radius-lg);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(2px);
+/* Desktop: CSS sticky so stage stays visible while panels scroll */
+@media (min-width: 900px) {
+    .sunpepe-landing__animation-stage {
+        width: 46%;
+        max-width: none;
+        min-height: 100vh;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        /* GSAP will take over pinning; sticky is the no-JS fallback */
+    }
 }
 
-.sunpepe-landing__pizza-circle {
-    width: 200px;
-    height: 200px;
-    background:
-        radial-gradient(circle at 35% 35%, rgba(255, 209, 102, 0.25) 0%, rgba(255, 159, 28, 0.08) 55%, transparent 100%);
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    border: 1px dashed rgba(255, 209, 102, 0.22);
-    box-shadow: 0 0 40px rgba(255, 159, 28, 0.08);
+/* ── Pizza SVG wrapper ────────────────────────────────────────────────────── */
+
+.sunpepe-landing__pizza-wrap {
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+    position: relative;
 }
 
-.sunpepe-landing__placeholder-label {
-    font-size: 0.72rem;
-    color: rgba(255, 244, 214, 0.25);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+@media (min-width: 900px) {
+    .sunpepe-landing__pizza-wrap {
+        max-width: 360px;
+    }
 }
+
+.sp-pizza-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    filter:
+        drop-shadow(0 12px 48px rgba(228, 61, 48, 0.22))
+        drop-shadow(0 2px 16px rgba(0, 0, 0, 0.45));
+}
+
+/* ── SVG pizza layers ─────────────────────────────────────────────────────── */
+
+/* Hidden by default — JS animates them in on scroll.
+   Reduced-motion and noscript fallbacks below restore visibility. */
+.sp-layer {
+    opacity: 0;
+}
+
+/* SVG transform-box so scale animations use each element's own center */
+.sp-layer--dough,
+.sp-layer--sauce,
+.sp-layer--toppings {
+    transform-box: fill-box;
+    transform-origin: center center;
+}
+
+/* CTA inside panel 6 — starts hidden; JS fades it in (beat 7) */
+.sp-cta-reveal {
+    opacity: 0;
+}
+
+/* ── Panels column ────────────────────────────────────────────────────────── */
 
 .sunpepe-landing__animation-panels {
     width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    padding: 1.5rem 1.5rem 3rem;
 }
 
+@media (min-width: 900px) {
+    .sunpepe-landing__animation-panels {
+        width: 54%;
+        padding: 0;
+    }
+}
+
+/* Each panel is tall enough to give scroll dwell time per beat */
 .sunpepe-landing__animation-panel {
-    padding: 1.1rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--sp-radius);
-    border-inline-end: 3px solid var(--sp-orange);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
-    transition: background var(--sp-transition);
+    justify-content: center;
+    gap: 1rem;
+    min-height: 55vh;
+    padding: 2.5rem 1.5rem;
+    border-inline-end: 3px solid rgba(255, 159, 28, 0.20);
+    transition: border-color var(--sp-transition);
 }
 
-.sunpepe-landing__animation-panel:hover {
-    background: rgba(255, 255, 255, 0.06);
+@media (min-width: 900px) {
+    .sunpepe-landing__animation-panel {
+        min-height: 100vh;
+        padding: 4rem 3.5rem;
+        border-inline-end: none;
+        border-inline-start: 3px solid rgba(255, 159, 28, 0.15);
+    }
+
+    .sunpepe-landing__animation-panel.is-active {
+        border-inline-start-color: var(--sp-orange);
+    }
+}
+
+/* Final beat panel */
+.sunpepe-landing__animation-panel:last-child {
+    border-inline-end-color: var(--sp-red);
+}
+
+@media (min-width: 900px) {
+    .sunpepe-landing__animation-panel:last-child {
+        border-inline-start-color: var(--sp-red);
+    }
+}
+
+/* ── Panel content ────────────────────────────────────────────────────────── */
+
+.sp-beat-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--sp-orange);
+    opacity: 0.65;
+    font-variant-numeric: tabular-nums;
 }
 
 .sunpepe-landing__animation-copy {
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: clamp(1.35rem, 3.5vw, 2.25rem);
+    font-weight: 800;
     color: var(--sp-cream);
-    line-height: 1.35;
+    line-height: 1.28;
+    max-width: 480px;
 }
 
-/* Beat 6 has an inline CTA */
-.sunpepe-landing__animation-panel:last-child {
-    border-inline-end-color: var(--sp-red);
-    background: rgba(228, 61, 48, 0.06);
+/* ── Reduced-motion fallback ─────────────────────────────────────────────── */
+/* Show all pizza layers in final state; no GSAP runs (checked in JS). */
+@media (prefers-reduced-motion: reduce) {
+    .sp-layer,
+    .sp-cta-reveal {
+        opacity: 1 !important;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

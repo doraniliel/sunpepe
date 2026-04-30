@@ -120,9 +120,25 @@ function sunpepe_enqueue_assets() {
     );
 
     wp_enqueue_script(
+        'gsap',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        [],
+        '3.12.5',
+        true
+    );
+
+    wp_enqueue_script(
+        'gsap-scrolltrigger',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+        [ 'gsap' ],
+        '3.12.5',
+        true
+    );
+
+    wp_enqueue_script(
         'sunpepe-landing',
         SUNPEPE_PLUGIN_URL . 'assets/js/sunpepe-landing.js',
-        [],
+        [ 'gsap-scrolltrigger' ],
         SUNPEPE_VERSION,
         true
     );

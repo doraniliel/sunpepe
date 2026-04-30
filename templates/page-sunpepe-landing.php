@@ -103,6 +103,7 @@ $static_menu = [
     </script>
 
     <?php wp_head(); ?>
+    <noscript><style>.sp-layer,.sp-cta-reveal{opacity:1 !important}</style></noscript>
 </head>
 <body class="sunpepe-landing-page">
 
@@ -175,48 +176,139 @@ $static_menu = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 2 — SCROLL ANIMATION
-         Structure is ready for Phase 6 GSAP ScrollTrigger.
-         Stage becomes sticky; panels scroll past it.
+         SECTION 2 — SCROLL ANIMATION (Phase 6)
+         Desktop: stage is CSS-sticky; GSAP scrubs pizza layers on scroll.
+         Mobile: pizza shown static; panels fade in via IntersectionObserver.
+         Reduced-motion: CSS shows all layers, no GSAP runs.
+         No-JS: noscript style in <head> makes all layers visible.
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__animation" aria-label="על הפיצה שלנו">
         <div class="sunpepe-landing__animation-scene">
 
-            <!-- Pizza stage — will be pinned/sticky in Phase 6 -->
+            <!-- ── Pizza stage (CSS sticky on desktop) ──────────────────────── -->
             <div class="sunpepe-landing__animation-stage" aria-hidden="true">
-                <!-- Phase 6: SVG pizza layers and mascot go here -->
-                <div class="sunpepe-landing__pizza-placeholder">
-                    <div class="sunpepe-landing__pizza-circle"></div>
-                    <p class="sunpepe-landing__placeholder-label">Phase 6 — אנימציית הפיצה</p>
-                </div>
-            </div>
+                <div class="sunpepe-landing__pizza-wrap">
 
-            <!-- Copy panels — scroll past the pinned stage in Phase 6 -->
+                    <svg class="sp-pizza-svg"
+                         viewBox="0 0 300 300"
+                         xmlns="http://www.w3.org/2000/svg"
+                         role="img"
+                         aria-label="פיצה של SUN PEPE">
+
+                        <!-- Beat 6: Glow ring (completes the pizza) -->
+                        <circle class="sp-layer sp-layer--glow"
+                                cx="150" cy="150" r="145"
+                                fill="none"
+                                stroke="rgba(255,209,102,0.40)"
+                                stroke-width="16"/>
+
+                        <!-- Beat 1: Dough / crust -->
+                        <g class="sp-layer sp-layer--dough">
+                            <circle cx="150" cy="150" r="138" fill="#e2b86e"/>
+                            <circle cx="150" cy="150" r="126" fill="#d4a038" opacity="0.45"/>
+                            <circle cx="150" cy="150" r="115" fill="#c08828" opacity="0.28"/>
+                        </g>
+
+                        <!-- Beat 3: Tomato sauce -->
+                        <circle class="sp-layer sp-layer--sauce"
+                                cx="150" cy="150" r="110"
+                                fill="#b83020"/>
+
+                        <!-- Beat 4: Mozzarella blobs -->
+                        <g class="sp-layer sp-layer--mozz">
+                            <ellipse cx="118" cy="130" rx="30" ry="22" fill="#f6f1e8"/>
+                            <ellipse cx="178" cy="120" rx="26" ry="20" fill="#ede8db"/>
+                            <ellipse cx="150" cy="170" rx="28" ry="22" fill="#f6f1e8"/>
+                            <ellipse cx="105" cy="168" rx="20" ry="16" fill="#ede8db"/>
+                            <ellipse cx="190" cy="162" rx="23" ry="18" fill="#f6f1e8"/>
+                            <ellipse cx="157" cy="110" rx="18" ry="14" fill="#ede8db"/>
+                        </g>
+
+                        <!-- Beat 5: Vegan vegetable toppings -->
+                        <g class="sp-layer sp-layer--toppings">
+                            <!-- Spinach / basil (green) -->
+                            <circle cx="132" cy="116" r="9"  fill="#2a8c2a"/>
+                            <circle cx="170" cy="150" r="8"  fill="#38aa38"/>
+                            <circle cx="122" cy="158" r="7"  fill="#2a8c2a"/>
+                            <!-- Cherry tomatoes (red) -->
+                            <circle cx="176" cy="124" r="10" fill="#e83838"/>
+                            <circle cx="147" cy="111" r="8"  fill="#c82020"/>
+                            <!-- Bell peppers (orange / yellow) -->
+                            <ellipse cx="162" cy="168" rx="12" ry="7" fill="#e67e22"
+                                     transform="rotate(-20,162,168)"/>
+                            <ellipse cx="116" cy="144" rx="11" ry="6" fill="#f0b020"
+                                     transform="rotate(15,116,144)"/>
+                            <!-- Olives -->
+                            <circle cx="191" cy="140" r="7" fill="#38382a"/>
+                            <circle cx="191" cy="140" r="3" fill="#787858"/>
+                        </g>
+
+                        <!-- Beat 2: Red pepper mascot placeholder (SUN PEPE character) -->
+                        <g class="sp-layer sp-layer--mascot"
+                           transform="translate(222,44)">
+                            <!-- Stem -->
+                            <rect x="-5" y="-16" width="9" height="16" rx="3"
+                                  fill="#27ae60"/>
+                            <rect x="4" y="-22" width="7" height="12" rx="3"
+                                  fill="#27ae60"
+                                  transform="rotate(30,4,-22)"/>
+                            <!-- Body -->
+                            <ellipse cx="0" cy="28" rx="26" ry="36"
+                                     fill="#e03838"/>
+                            <!-- Shine -->
+                            <ellipse cx="-9" cy="12" rx="7" ry="10"
+                                     fill="rgba(255,255,255,0.22)"/>
+                            <!-- Eyes -->
+                            <circle cx="-9"  cy="20" r="5"   fill="white"/>
+                            <circle cx="9"   cy="20" r="5"   fill="white"/>
+                            <circle cx="-8"  cy="21" r="2.5" fill="#1a1a1a"/>
+                            <circle cx="10"  cy="21" r="2.5" fill="#1a1a1a"/>
+                            <circle cx="-6"  cy="20" r="1"   fill="white"/>
+                            <circle cx="12"  cy="20" r="1"   fill="white"/>
+                            <!-- Smile -->
+                            <path d="M -10 33 Q 0 42 10 33"
+                                  stroke="#1a1a1a" stroke-width="2.5"
+                                  fill="none" stroke-linecap="round"/>
+                        </g>
+
+                    </svg><!-- /.sp-pizza-svg -->
+
+                </div><!-- /.pizza-wrap -->
+            </div><!-- /.animation-stage -->
+
+            <!-- ── Scroll copy panels ────────────────────────────────────────── -->
             <div class="sunpepe-landing__animation-panels">
 
                 <div class="sunpepe-landing__animation-panel" data-beat="1">
+                    <span class="sp-beat-label">01</span>
                     <p class="sunpepe-landing__animation-copy">מתחילים בבצק טרי</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="2">
+                    <span class="sp-beat-label">02</span>
                     <p class="sunpepe-landing__animation-copy"><?php echo esc_html( $business_name ); ?> נכנס לעניינים</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="3">
+                    <span class="sp-beat-label">03</span>
                     <p class="sunpepe-landing__animation-copy">רוטב עשיר נמרח בדיוק כמו שצריך</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="4">
+                    <span class="sp-beat-label">04</span>
                     <p class="sunpepe-landing__animation-copy">מוצרלה נמסה מעל הכול</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="5">
+                    <span class="sp-beat-label">05</span>
                     <p class="sunpepe-landing__animation-copy">תוספות ירקות צבעוניות בלבד</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="6">
+                    <span class="sp-beat-label">06</span>
                     <p class="sunpepe-landing__animation-copy">הפיצה מוכנה — עכשיו רק להתקשר</p>
-                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>" class="sunpepe-landing__cta-primary">
+                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
+                       class="sunpepe-landing__cta-primary sp-cta-reveal">
                         <?php echo esc_html( $primary_cta_label ); ?>
                     </a>
                 </div>
