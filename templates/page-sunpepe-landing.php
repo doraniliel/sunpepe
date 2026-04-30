@@ -195,80 +195,147 @@ $static_menu = [
                          role="img"
                          aria-label="פיצה של SUN PEPE">
 
-                        <!-- Beat 6: Glow ring (completes the pizza) -->
-                        <circle class="sp-layer sp-layer--glow"
-                                cx="150" cy="150" r="145"
-                                fill="none"
-                                stroke="rgba(255,209,102,0.40)"
-                                stroke-width="16"/>
+                        <defs>
+                            <!-- Dough: warm golden, off-centre highlight -->
+                            <radialGradient id="sp-grd-dough" cx="126" cy="114" r="165" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%"   stop-color="#f8dc88"/>
+                                <stop offset="55%"  stop-color="#d99030"/>
+                                <stop offset="100%" stop-color="#a86818"/>
+                            </radialGradient>
+                            <!-- Crust ring: transparent centre → dark brown edge -->
+                            <radialGradient id="sp-grd-crust" cx="150" cy="150" r="138" gradientUnits="userSpaceOnUse">
+                                <stop offset="68%"  stop-color="rgba(0,0,0,0)"/>
+                                <stop offset="88%"  stop-color="rgba(90,38,0,0.55)"/>
+                                <stop offset="100%" stop-color="rgba(60,22,0,0.88)"/>
+                            </radialGradient>
+                            <!-- Sauce: bright red centre → deep crimson edge -->
+                            <radialGradient id="sp-grd-sauce" cx="132" cy="116" r="140" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%"   stop-color="#e03010"/>
+                                <stop offset="60%"  stop-color="#b02008"/>
+                                <stop offset="100%" stop-color="#780e04"/>
+                            </radialGradient>
+                            <!-- Glow halo: transparent core → warm amber at edge -->
+                            <radialGradient id="sp-grd-glow" cx="150" cy="150" r="150" gradientUnits="userSpaceOnUse">
+                                <stop offset="76%"  stop-color="rgba(255,180,30,0)"/>
+                                <stop offset="88%"  stop-color="rgba(255,165,20,0.50)"/>
+                                <stop offset="100%" stop-color="rgba(240,120,0,0.85)"/>
+                            </radialGradient>
+                        </defs>
 
-                        <!-- Beat 1: Dough / crust -->
+                        <!-- Beat 6: Glow halo — rendered first so it sits behind pizza -->
+                        <g class="sp-layer sp-layer--glow">
+                            <circle cx="150" cy="150" r="150" fill="url(#sp-grd-glow)"/>
+                            <circle cx="150" cy="150" r="143" fill="none"
+                                    stroke="rgba(255,190,40,0.55)" stroke-width="2.5"/>
+                        </g>
+
+                        <!-- Beat 1: Dough + crust -->
                         <g class="sp-layer sp-layer--dough">
-                            <circle cx="150" cy="150" r="138" fill="#e2b86e"/>
-                            <circle cx="150" cy="150" r="126" fill="#d4a038" opacity="0.45"/>
-                            <circle cx="150" cy="150" r="115" fill="#c08828" opacity="0.28"/>
+                            <circle cx="150" cy="150" r="138" fill="url(#sp-grd-dough)"/>
+                            <circle cx="150" cy="150" r="138" fill="url(#sp-grd-crust)"/>
+                            <!-- Crust bake-spot texture (scattered ellipses at the rim) -->
+                            <ellipse cx="150" cy="16"  rx="5.5" ry="3.5" fill="rgba(110,48,4,0.38)"/>
+                            <ellipse cx="222" cy="38"  rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
+                            <ellipse cx="270" cy="104" rx="3.5" ry="5"   fill="rgba(110,48,4,0.28)"/>
+                            <ellipse cx="278" cy="174" rx="3"   ry="4.5" fill="rgba(110,48,4,0.30)"/>
+                            <ellipse cx="233" cy="252" rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
+                            <ellipse cx="150" cy="283" rx="5.5" ry="3.5" fill="rgba(110,48,4,0.38)"/>
+                            <ellipse cx="70"  cy="254" rx="4"   ry="3"   fill="rgba(110,48,4,0.30)"/>
+                            <ellipse cx="23"  cy="174" rx="3"   ry="4.5" fill="rgba(110,48,4,0.28)"/>
+                            <ellipse cx="32"  cy="104" rx="3.5" ry="5"   fill="rgba(110,48,4,0.28)"/>
+                            <ellipse cx="78"  cy="38"  rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
                         </g>
 
                         <!-- Beat 3: Tomato sauce -->
                         <circle class="sp-layer sp-layer--sauce"
-                                cx="150" cy="150" r="110"
-                                fill="#b83020"/>
+                                cx="150" cy="150" r="112"
+                                fill="url(#sp-grd-sauce)"/>
 
                         <!-- Beat 4: Mozzarella blobs -->
                         <g class="sp-layer sp-layer--mozz">
-                            <ellipse cx="118" cy="130" rx="30" ry="22" fill="#f6f1e8"/>
-                            <ellipse cx="178" cy="120" rx="26" ry="20" fill="#ede8db"/>
-                            <ellipse cx="150" cy="170" rx="28" ry="22" fill="#f6f1e8"/>
-                            <ellipse cx="105" cy="168" rx="20" ry="16" fill="#ede8db"/>
-                            <ellipse cx="190" cy="162" rx="23" ry="18" fill="#f6f1e8"/>
-                            <ellipse cx="157" cy="110" rx="18" ry="14" fill="#ede8db"/>
+                            <ellipse cx="118" cy="132" rx="33" ry="23" fill="#f7f2e8"/>
+                            <ellipse cx="180" cy="120" rx="27" ry="20" fill="#ede8db"/>
+                            <ellipse cx="148" cy="172" rx="31" ry="23" fill="#f7f2e8"/>
+                            <ellipse cx="104" cy="170" rx="22" ry="16" fill="#e8e2d5"/>
+                            <ellipse cx="192" cy="162" rx="25" ry="18" fill="#f0ece0"/>
+                            <ellipse cx="158" cy="110" rx="20" ry="14" fill="#ede8db"/>
+                            <!-- Blob highlights (upper-left shine on each lobe) -->
+                            <ellipse cx="112" cy="126" rx="10" ry="6"   fill="rgba(255,255,255,0.55)"/>
+                            <ellipse cx="174" cy="115" rx="8"  ry="5"   fill="rgba(255,255,255,0.50)"/>
+                            <ellipse cx="142" cy="166" rx="9"  ry="5.5" fill="rgba(255,255,255,0.55)"/>
+                            <!-- Melted-edge warm shadows -->
+                            <ellipse cx="118" cy="152" rx="31" ry="5"   fill="rgba(160,120,60,0.16)"/>
+                            <ellipse cx="148" cy="192" rx="29" ry="5"   fill="rgba(160,120,60,0.16)"/>
                         </g>
 
                         <!-- Beat 5: Vegan vegetable toppings -->
                         <g class="sp-layer sp-layer--toppings">
-                            <!-- Spinach / basil (green) -->
-                            <circle cx="132" cy="116" r="9"  fill="#2a8c2a"/>
-                            <circle cx="170" cy="150" r="8"  fill="#38aa38"/>
-                            <circle cx="122" cy="158" r="7"  fill="#2a8c2a"/>
-                            <!-- Cherry tomatoes (red) -->
-                            <circle cx="176" cy="124" r="10" fill="#e83838"/>
-                            <circle cx="147" cy="111" r="8"  fill="#c82020"/>
-                            <!-- Bell peppers (orange / yellow) -->
-                            <ellipse cx="162" cy="168" rx="12" ry="7" fill="#e67e22"
-                                     transform="rotate(-20,162,168)"/>
-                            <ellipse cx="116" cy="144" rx="11" ry="6" fill="#f0b020"
-                                     transform="rotate(15,116,144)"/>
-                            <!-- Olives -->
-                            <circle cx="191" cy="140" r="7" fill="#38382a"/>
-                            <circle cx="191" cy="140" r="3" fill="#787858"/>
+                            <!-- Basil / spinach leaves -->
+                            <ellipse cx="132" cy="116" rx="9.5" ry="6"   fill="#1a9626"/>
+                            <ellipse cx="171" cy="150" rx="8.5" ry="5.5" fill="#25aa2e"/>
+                            <ellipse cx="122" cy="159" rx="7.5" ry="5"   fill="#1a9626"/>
+                            <ellipse cx="163" cy="187" rx="8"   ry="5"   fill="#25aa2e"/>
+                            <line x1="132" y1="111" x2="132" y2="121" stroke="#0e5e18" stroke-width="1.2"/>
+                            <line x1="171" y1="145" x2="171" y2="155" stroke="#0e5e18" stroke-width="1.2"/>
+                            <!-- Cherry tomatoes -->
+                            <circle cx="177" cy="126" r="11"  fill="#e02020"/>
+                            <circle cx="147" cy="112" r="9"   fill="#c81818"/>
+                            <circle cx="190" cy="183" r="9"   fill="#d82020"/>
+                            <!-- Tomato highlights -->
+                            <circle cx="173" cy="122" r="4"   fill="rgba(255,210,210,0.58)"/>
+                            <circle cx="143" cy="108" r="3"   fill="rgba(255,210,210,0.52)"/>
+                            <circle cx="186" cy="179" r="3"   fill="rgba(255,210,210,0.52)"/>
+                            <!-- Stem nubs -->
+                            <circle cx="177" cy="116" r="2"   fill="#228B22" opacity="0.85"/>
+                            <circle cx="147" cy="104" r="1.5" fill="#228B22" opacity="0.85"/>
+                            <!-- Bell peppers (no SVG transform attribute) -->
+                            <ellipse cx="162" cy="168" rx="12" ry="7"   fill="#e07820"/>
+                            <ellipse cx="116" cy="144" rx="11" ry="7"   fill="#e8ba20"/>
+                            <ellipse cx="159" cy="165" rx="4.5" ry="2.5" fill="rgba(255,240,160,0.50)"/>
+                            <ellipse cx="113" cy="141" rx="4"   ry="2"   fill="rgba(255,240,160,0.45)"/>
+                            <!-- Black olives (ring style) -->
+                            <circle cx="192" cy="140" r="8.5" fill="#28281a"/>
+                            <circle cx="192" cy="140" r="4.5" fill="#72724a"/>
+                            <circle cx="135" cy="188" r="7.5" fill="#28281a"/>
+                            <circle cx="135" cy="188" r="4"   fill="#72724a"/>
                         </g>
 
-                        <!-- Beat 2: Red pepper mascot placeholder (SUN PEPE character).
-                             All coordinates are absolute (no transform attribute) so the
-                             reduced-motion CSS rule "transform:none !important" cannot
+                        <!-- Beat 2: SUN PEPE mascot — red pepper character.
+                             All coordinates are absolute (no SVG transform attribute)
+                             so reduced-motion CSS "transform:none !important" cannot
                              displace this element from its intended position. -->
                         <g class="sp-layer sp-layer--mascot">
-                            <!-- Stem (absolute coords: local origin was translate(222,44)) -->
-                            <rect x="217" y="28" width="9" height="16" rx="3"
-                                  fill="#27ae60"/>
-                            <rect x="226" y="22" width="7" height="12" rx="3"
-                                  fill="#27ae60"/>
-                            <!-- Body -->
-                            <ellipse cx="222" cy="72" rx="26" ry="36"
-                                     fill="#e03838"/>
-                            <!-- Shine -->
-                            <ellipse cx="213" cy="56" rx="7" ry="10"
-                                     fill="rgba(255,255,255,0.22)"/>
-                            <!-- Eyes -->
-                            <circle cx="213" cy="64" r="5"   fill="white"/>
-                            <circle cx="231" cy="64" r="5"   fill="white"/>
-                            <circle cx="214" cy="65" r="2.5" fill="#1a1a1a"/>
-                            <circle cx="232" cy="65" r="2.5" fill="#1a1a1a"/>
-                            <circle cx="216" cy="64" r="1"   fill="white"/>
-                            <circle cx="234" cy="64" r="1"   fill="white"/>
+                            <!-- Stems -->
+                            <rect x="218" y="17" width="9"  height="20" rx="4" fill="#2ecc71"/>
+                            <rect x="227" y="12" width="8"  height="15" rx="4" fill="#27ae60"/>
+                            <!-- Drop shadow on pizza surface -->
+                            <ellipse cx="222" cy="107" rx="20" ry="5" fill="rgba(0,0,0,0.20)"/>
+                            <!-- Body: main pepper ellipse -->
+                            <ellipse cx="222" cy="65"  rx="24" ry="33" fill="#e02e2e"/>
+                            <!-- Pointed tip below body (darker, continues pepper silhouette) -->
+                            <path d="M 210 96 Q 222 115 234 96 Z" fill="#c01818"/>
+                            <!-- Right-side depth shadow on body -->
+                            <ellipse cx="233" cy="65"  rx="8"  ry="23" fill="rgba(110,0,0,0.22)"/>
+                            <!-- Shine highlight -->
+                            <ellipse cx="211" cy="47"  rx="7"  ry="11" fill="rgba(255,255,255,0.32)"/>
+                            <!-- Arm bumps -->
+                            <ellipse cx="200" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
+                            <ellipse cx="244" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
+                            <!-- Eye whites -->
+                            <circle cx="213" cy="61" r="7"   fill="white"/>
+                            <circle cx="231" cy="61" r="7"   fill="white"/>
+                            <!-- Pupils -->
+                            <circle cx="214" cy="62" r="3.5" fill="#141414"/>
+                            <circle cx="232" cy="62" r="3.5" fill="#141414"/>
+                            <!-- Eye shine -->
+                            <circle cx="215" cy="60" r="1.4" fill="white"/>
+                            <circle cx="233" cy="60" r="1.4" fill="white"/>
+                            <!-- Blush cheeks -->
+                            <ellipse cx="204" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
+                            <ellipse cx="240" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
                             <!-- Smile -->
-                            <path d="M 212 77 Q 222 86 232 77"
-                                  stroke="#1a1a1a" stroke-width="2.5"
+                            <path d="M 209 74 Q 222 88 235 74"
+                                  stroke="#141414" stroke-width="2.8"
                                   fill="none" stroke-linecap="round"/>
                         </g>
 

@@ -325,7 +325,10 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .sunpepe-landing__animation {
-    background: linear-gradient(180deg, var(--sp-navy) 0%, var(--sp-navy-mid) 50%, var(--sp-navy) 100%);
+    background:
+        radial-gradient(ellipse 42% 60% at 74% 50%, rgba(255, 110, 0, 0.055) 0%, transparent 70%),
+        radial-gradient(ellipse 38% 45% at 26% 50%, rgba(20, 60, 180, 0.06) 0%, transparent 65%),
+        linear-gradient(180deg, var(--sp-navy) 0%, var(--sp-navy-mid) 50%, var(--sp-navy) 100%);
     /* Section height determined entirely by the panels column */
 }
 
@@ -357,6 +360,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.sunpepe-landing__animation-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 65% at 50% 52%, rgba(255, 140, 20, 0.09) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Desktop: GSAP handles pinning via ScrollTrigger.create({ pin: stage }).
@@ -379,11 +392,12 @@
     max-width: 320px;
     margin-inline: auto;
     position: relative;
+    z-index: 1;
 }
 
 @media (min-width: 900px) {
     .sunpepe-landing__pizza-wrap {
-        max-width: 360px;
+        max-width: 400px;
     }
 }
 
@@ -394,8 +408,9 @@
     height: auto;
     overflow: visible;
     filter:
-        drop-shadow(0 12px 48px rgba(228, 61, 48, 0.22))
-        drop-shadow(0 2px 16px rgba(0, 0, 0, 0.45));
+        drop-shadow(0 4px 28px rgba(200, 80, 0, 0.42))
+        drop-shadow(0 16px 56px rgba(228, 61, 48, 0.28))
+        drop-shadow(0 2px 10px rgba(0, 0, 0, 0.55));
 }
 
 /* ── SVG pizza layers ─────────────────────────────────────────────────────── */
@@ -409,7 +424,9 @@
 /* SVG transform-box so scale animations use each element's own center */
 .sunpepe-landing .sp-layer--dough,
 .sunpepe-landing .sp-layer--sauce,
-.sunpepe-landing .sp-layer--toppings {
+.sunpepe-landing .sp-layer--mozz,
+.sunpepe-landing .sp-layer--toppings,
+.sunpepe-landing .sp-layer--glow {
     transform-box: fill-box;
     transform-origin: center center;
 }
@@ -475,12 +492,22 @@
 
 .sunpepe-landing .sp-beat-label {
     display: block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: 0.60rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
     color: var(--sp-orange);
-    opacity: 0.65;
+    opacity: 0.70;
     font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
+    transition: opacity var(--sp-transition);
+}
+
+.sunpepe-landing__animation-panel.is-active .sp-beat-label {
+    opacity: 1;
+}
+
+.sunpepe-landing__animation-panel.is-active .sunpepe-landing__animation-copy {
+    color: #ffffff;
 }
 
 .sunpepe-landing__animation-copy {
