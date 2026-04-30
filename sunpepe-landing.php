@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'SUNPEPE_VERSION',      '0.2.0' );
+define( 'SUNPEPE_VERSION',      '0.3.0' );
 define( 'SUNPEPE_PLUGIN_DIR',   plugin_dir_path( __FILE__ ) );
 define( 'SUNPEPE_PLUGIN_URL',   plugin_dir_url( __FILE__ ) );
 define( 'SUNPEPE_TEMPLATE_KEY', 'sunpepe-landing' );
@@ -116,7 +116,7 @@ function sunpepe_enqueue_assets() {
         'sunpepe-landing',
         SUNPEPE_PLUGIN_URL . 'assets/css/sunpepe-landing.css',
         [ 'sunpepe-heebo' ],
-        SUNPEPE_VERSION
+        filemtime( SUNPEPE_PLUGIN_DIR . 'assets/css/sunpepe-landing.css' )
     );
 
     wp_enqueue_script(
@@ -139,7 +139,7 @@ function sunpepe_enqueue_assets() {
         'sunpepe-landing',
         SUNPEPE_PLUGIN_URL . 'assets/js/sunpepe-landing.js',
         [ 'gsap-scrolltrigger' ],
-        SUNPEPE_VERSION,
+        filemtime( SUNPEPE_PLUGIN_DIR . 'assets/js/sunpepe-landing.js' ),
         true
     );
 }
