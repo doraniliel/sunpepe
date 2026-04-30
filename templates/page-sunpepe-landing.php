@@ -102,6 +102,9 @@ $static_menu = [
     }
     </script>
 
+    <link rel="preload"
+          href="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-dough.webp' ); ?>"
+          as="image" type="image/webp">
     <?php wp_head(); ?>
     <noscript><style>.sp-layer,.sp-cta-reveal{opacity:1 !important}</style></noscript>
 </head>
@@ -189,157 +192,66 @@ $static_menu = [
             <div class="sunpepe-landing__animation-stage" aria-hidden="true">
                 <div class="sunpepe-landing__pizza-wrap">
 
-                    <svg class="sp-pizza-svg"
-                         viewBox="0 0 300 300"
-                         xmlns="http://www.w3.org/2000/svg"
-                         role="img"
-                         aria-label="פיצה של SUN PEPE">
+                    <div class="sp-pizza-stack" role="img" aria-label="פיצה של SUN PEPE">
 
-                        <defs>
-                            <!-- Dough: warm golden, off-centre highlight -->
-                            <radialGradient id="sp-grd-dough" cx="126" cy="114" r="165" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%"   stop-color="#f8dc88"/>
-                                <stop offset="55%"  stop-color="#d99030"/>
-                                <stop offset="100%" stop-color="#a86818"/>
-                            </radialGradient>
-                            <!-- Crust ring: transparent centre → dark brown edge -->
-                            <radialGradient id="sp-grd-crust" cx="150" cy="150" r="138" gradientUnits="userSpaceOnUse">
-                                <stop offset="68%"  stop-color="rgba(0,0,0,0)"/>
-                                <stop offset="88%"  stop-color="rgba(90,38,0,0.55)"/>
-                                <stop offset="100%" stop-color="rgba(60,22,0,0.88)"/>
-                            </radialGradient>
-                            <!-- Sauce: bright red centre → deep crimson edge -->
-                            <radialGradient id="sp-grd-sauce" cx="132" cy="116" r="140" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%"   stop-color="#e03010"/>
-                                <stop offset="60%"  stop-color="#b02008"/>
-                                <stop offset="100%" stop-color="#780e04"/>
-                            </radialGradient>
-                            <!-- Glow halo: transparent core → warm amber at edge -->
-                            <radialGradient id="sp-grd-glow" cx="150" cy="150" r="150" gradientUnits="userSpaceOnUse">
-                                <stop offset="76%"  stop-color="rgba(255,180,30,0)"/>
-                                <stop offset="88%"  stop-color="rgba(255,165,20,0.50)"/>
-                                <stop offset="100%" stop-color="rgba(240,120,0,0.85)"/>
-                            </radialGradient>
-                        </defs>
+                        <!-- Beat 1: Raw dough -->
+                        <img class="sp-layer sp-layer--dough"
+                             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-dough.webp' ); ?>"
+                             alt="בצק פיצה" width="1254" height="1254"
+                             loading="eager" decoding="async">
 
-                        <!-- Beat 6: Glow halo — rendered first so it sits behind pizza -->
-                        <g class="sp-layer sp-layer--glow">
-                            <circle cx="150" cy="150" r="150" fill="url(#sp-grd-glow)"/>
-                            <circle cx="150" cy="150" r="143" fill="none"
-                                    stroke="rgba(255,190,40,0.55)" stroke-width="2.5"/>
-                        </g>
+                        <!-- Beat 3: Dough + sauce -->
+                        <img class="sp-layer sp-layer--sauce"
+                             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-sauce.webp' ); ?>"
+                             alt="רוטב עגבניות" width="1254" height="1254"
+                             loading="lazy" decoding="async">
 
-                        <!-- Beat 1: Dough + crust -->
-                        <g class="sp-layer sp-layer--dough">
-                            <circle cx="150" cy="150" r="138" fill="url(#sp-grd-dough)"/>
-                            <circle cx="150" cy="150" r="138" fill="url(#sp-grd-crust)"/>
-                            <!-- Crust bake-spot texture (scattered ellipses at the rim) -->
-                            <ellipse cx="150" cy="16"  rx="5.5" ry="3.5" fill="rgba(110,48,4,0.38)"/>
-                            <ellipse cx="222" cy="38"  rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
-                            <ellipse cx="270" cy="104" rx="3.5" ry="5"   fill="rgba(110,48,4,0.28)"/>
-                            <ellipse cx="278" cy="174" rx="3"   ry="4.5" fill="rgba(110,48,4,0.30)"/>
-                            <ellipse cx="233" cy="252" rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
-                            <ellipse cx="150" cy="283" rx="5.5" ry="3.5" fill="rgba(110,48,4,0.38)"/>
-                            <ellipse cx="70"  cy="254" rx="4"   ry="3"   fill="rgba(110,48,4,0.30)"/>
-                            <ellipse cx="23"  cy="174" rx="3"   ry="4.5" fill="rgba(110,48,4,0.28)"/>
-                            <ellipse cx="32"  cy="104" rx="3.5" ry="5"   fill="rgba(110,48,4,0.28)"/>
-                            <ellipse cx="78"  cy="38"  rx="4"   ry="3"   fill="rgba(110,48,4,0.32)"/>
-                        </g>
+                        <!-- Beat 4: Dough + sauce + mozzarella -->
+                        <img class="sp-layer sp-layer--mozz"
+                             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-mozz.webp' ); ?>"
+                             alt="מוצרלה" width="1254" height="1254"
+                             loading="lazy" decoding="async">
 
-                        <!-- Beat 3: Tomato sauce -->
-                        <circle class="sp-layer sp-layer--sauce"
-                                cx="150" cy="150" r="112"
-                                fill="url(#sp-grd-sauce)"/>
+                        <!-- Beat 5: Dough + sauce + mozz + toppings -->
+                        <img class="sp-layer sp-layer--toppings"
+                             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-toppings.webp' ); ?>"
+                             alt="תוספות ירקות" width="1254" height="1254"
+                             loading="lazy" decoding="async">
 
-                        <!-- Beat 4: Mozzarella blobs -->
-                        <g class="sp-layer sp-layer--mozz">
-                            <ellipse cx="118" cy="132" rx="33" ry="23" fill="#f7f2e8"/>
-                            <ellipse cx="180" cy="120" rx="27" ry="20" fill="#ede8db"/>
-                            <ellipse cx="148" cy="172" rx="31" ry="23" fill="#f7f2e8"/>
-                            <ellipse cx="104" cy="170" rx="22" ry="16" fill="#e8e2d5"/>
-                            <ellipse cx="192" cy="162" rx="25" ry="18" fill="#f0ece0"/>
-                            <ellipse cx="158" cy="110" rx="20" ry="14" fill="#ede8db"/>
-                            <!-- Blob highlights (upper-left shine on each lobe) -->
-                            <ellipse cx="112" cy="126" rx="10" ry="6"   fill="rgba(255,255,255,0.55)"/>
-                            <ellipse cx="174" cy="115" rx="8"  ry="5"   fill="rgba(255,255,255,0.50)"/>
-                            <ellipse cx="142" cy="166" rx="9"  ry="5.5" fill="rgba(255,255,255,0.55)"/>
-                            <!-- Melted-edge warm shadows -->
-                            <ellipse cx="118" cy="152" rx="31" ry="5"   fill="rgba(160,120,60,0.16)"/>
-                            <ellipse cx="148" cy="192" rx="29" ry="5"   fill="rgba(160,120,60,0.16)"/>
-                        </g>
-
-                        <!-- Beat 5: Vegan vegetable toppings -->
-                        <g class="sp-layer sp-layer--toppings">
-                            <!-- Basil / spinach leaves -->
-                            <ellipse cx="132" cy="116" rx="9.5" ry="6"   fill="#1a9626"/>
-                            <ellipse cx="171" cy="150" rx="8.5" ry="5.5" fill="#25aa2e"/>
-                            <ellipse cx="122" cy="159" rx="7.5" ry="5"   fill="#1a9626"/>
-                            <ellipse cx="163" cy="187" rx="8"   ry="5"   fill="#25aa2e"/>
-                            <line x1="132" y1="111" x2="132" y2="121" stroke="#0e5e18" stroke-width="1.2"/>
-                            <line x1="171" y1="145" x2="171" y2="155" stroke="#0e5e18" stroke-width="1.2"/>
-                            <!-- Cherry tomatoes -->
-                            <circle cx="177" cy="126" r="11"  fill="#e02020"/>
-                            <circle cx="147" cy="112" r="9"   fill="#c81818"/>
-                            <circle cx="190" cy="183" r="9"   fill="#d82020"/>
-                            <!-- Tomato highlights -->
-                            <circle cx="173" cy="122" r="4"   fill="rgba(255,210,210,0.58)"/>
-                            <circle cx="143" cy="108" r="3"   fill="rgba(255,210,210,0.52)"/>
-                            <circle cx="186" cy="179" r="3"   fill="rgba(255,210,210,0.52)"/>
-                            <!-- Stem nubs -->
-                            <circle cx="177" cy="116" r="2"   fill="#228B22" opacity="0.85"/>
-                            <circle cx="147" cy="104" r="1.5" fill="#228B22" opacity="0.85"/>
-                            <!-- Bell peppers (no SVG transform attribute) -->
-                            <ellipse cx="162" cy="168" rx="12" ry="7"   fill="#e07820"/>
-                            <ellipse cx="116" cy="144" rx="11" ry="7"   fill="#e8ba20"/>
-                            <ellipse cx="159" cy="165" rx="4.5" ry="2.5" fill="rgba(255,240,160,0.50)"/>
-                            <ellipse cx="113" cy="141" rx="4"   ry="2"   fill="rgba(255,240,160,0.45)"/>
-                            <!-- Black olives (ring style) -->
-                            <circle cx="192" cy="140" r="8.5" fill="#28281a"/>
-                            <circle cx="192" cy="140" r="4.5" fill="#72724a"/>
-                            <circle cx="135" cy="188" r="7.5" fill="#28281a"/>
-                            <circle cx="135" cy="188" r="4"   fill="#72724a"/>
-                        </g>
+                        <!-- Beat 6: Complete baked pizza -->
+                        <img class="sp-layer sp-layer--complete"
+                             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/pizza-complete.webp' ); ?>"
+                             alt="פיצה מוכנה" width="1254" height="1254"
+                             loading="lazy" decoding="async">
 
                         <!-- Beat 2: SUN PEPE mascot — red pepper character.
                              All coordinates are absolute (no SVG transform attribute)
                              so reduced-motion CSS "transform:none !important" cannot
                              displace this element from its intended position. -->
-                        <g class="sp-layer sp-layer--mascot">
-                            <!-- Stems -->
-                            <rect x="218" y="17" width="9"  height="20" rx="4" fill="#2ecc71"/>
-                            <rect x="227" y="12" width="8"  height="15" rx="4" fill="#27ae60"/>
-                            <!-- Drop shadow on pizza surface -->
-                            <ellipse cx="222" cy="107" rx="20" ry="5" fill="rgba(0,0,0,0.20)"/>
-                            <!-- Body: main pepper ellipse -->
-                            <ellipse cx="222" cy="65"  rx="24" ry="33" fill="#e02e2e"/>
-                            <!-- Pointed tip below body (darker, continues pepper silhouette) -->
-                            <path d="M 210 96 Q 222 115 234 96 Z" fill="#c01818"/>
-                            <!-- Right-side depth shadow on body -->
-                            <ellipse cx="233" cy="65"  rx="8"  ry="23" fill="rgba(110,0,0,0.22)"/>
-                            <!-- Shine highlight -->
-                            <ellipse cx="211" cy="47"  rx="7"  ry="11" fill="rgba(255,255,255,0.32)"/>
-                            <!-- Arm bumps -->
-                            <ellipse cx="200" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
-                            <ellipse cx="244" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
-                            <!-- Eye whites -->
-                            <circle cx="213" cy="61" r="7"   fill="white"/>
-                            <circle cx="231" cy="61" r="7"   fill="white"/>
-                            <!-- Pupils -->
-                            <circle cx="214" cy="62" r="3.5" fill="#141414"/>
-                            <circle cx="232" cy="62" r="3.5" fill="#141414"/>
-                            <!-- Eye shine -->
-                            <circle cx="215" cy="60" r="1.4" fill="white"/>
-                            <circle cx="233" cy="60" r="1.4" fill="white"/>
-                            <!-- Blush cheeks -->
-                            <ellipse cx="204" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
-                            <ellipse cx="240" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
-                            <!-- Smile -->
-                            <path d="M 209 74 Q 222 88 235 74"
-                                  stroke="#141414" stroke-width="2.8"
-                                  fill="none" stroke-linecap="round"/>
-                        </g>
+                        <div class="sp-layer sp-layer--mascot sp-mascot-wrap" aria-hidden="true">
+                            <svg class="sp-mascot-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="218" y="17" width="9"  height="20" rx="4" fill="#2ecc71"/>
+                                <rect x="227" y="12" width="8"  height="15" rx="4" fill="#27ae60"/>
+                                <ellipse cx="222" cy="107" rx="20" ry="5" fill="rgba(0,0,0,0.20)"/>
+                                <ellipse cx="222" cy="65"  rx="24" ry="33" fill="#e02e2e"/>
+                                <path d="M 210 96 Q 222 115 234 96 Z" fill="#c01818"/>
+                                <ellipse cx="233" cy="65"  rx="8"  ry="23" fill="rgba(110,0,0,0.22)"/>
+                                <ellipse cx="211" cy="47"  rx="7"  ry="11" fill="rgba(255,255,255,0.32)"/>
+                                <ellipse cx="200" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
+                                <ellipse cx="244" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
+                                <circle cx="213" cy="61" r="7"   fill="white"/>
+                                <circle cx="231" cy="61" r="7"   fill="white"/>
+                                <circle cx="214" cy="62" r="3.5" fill="#141414"/>
+                                <circle cx="232" cy="62" r="3.5" fill="#141414"/>
+                                <circle cx="215" cy="60" r="1.4" fill="white"/>
+                                <circle cx="233" cy="60" r="1.4" fill="white"/>
+                                <ellipse cx="204" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
+                                <ellipse cx="240" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
+                                <path d="M 209 74 Q 222 88 235 74" stroke="#141414" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
 
-                    </svg><!-- /.sp-pizza-svg -->
+                    </div><!-- /.sp-pizza-stack -->
 
                 </div><!-- /.pizza-wrap -->
             </div><!-- /.animation-stage -->

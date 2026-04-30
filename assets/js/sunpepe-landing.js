@@ -42,7 +42,7 @@
         sauce   : root.querySelector( '.sp-layer--sauce' ),
         mozz    : root.querySelector( '.sp-layer--mozz' ),
         toppings: root.querySelector( '.sp-layer--toppings' ),
-        glow    : root.querySelector( '.sp-layer--glow' ),
+        complete: root.querySelector( '.sp-layer--complete' ),
     };
     var ctaReveal = root.querySelector( '.sp-cta-reveal' );
 
@@ -140,48 +140,48 @@
             },
         } );
 
-        /* Beat 1 — Dough spins up from small, slight counter-clockwise rotation */
+        /* Beat 1 — Dough: fade + gentle scale (no rotation for photos) */
         spTimeline.fromTo( layers.dough,
-            { opacity: 0, scale: 0.80, rotation: -6 },
-            { opacity: 1, scale: 1, rotation: 0, duration: 1.3, ease: 'back.out(1.4)' },
+            { opacity: 0, scale: 0.92 },
+            { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
         0 );
 
         /* Beat 2 — Mascot drops in from above with a strong bounce */
         spTimeline.fromTo( layers.mascot,
             { opacity: 0, y: -52 },
             { opacity: 1, y: 0, duration: 1.1, ease: 'back.out(2.0)' },
-        1.3 );
+        1.2 );
 
-        /* Beat 3 — Sauce spreads from small */
+        /* Beat 3 — Sauce: cross-fade (cumulative image) */
         spTimeline.fromTo( layers.sauce,
-            { opacity: 0, scale: 0.88 },
-            { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' },
-        2.4 );
+            { opacity: 0 },
+            { opacity: 1, duration: 1.1, ease: 'power2.inOut' },
+        2.3 );
 
-        /* Beat 4 — Mozzarella drifts down */
+        /* Beat 4 — Mozzarella: cross-fade (cumulative image) */
         spTimeline.fromTo( layers.mozz,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out' },
-        3.5 );
+            { opacity: 0 },
+            { opacity: 1, duration: 1.1, ease: 'power2.inOut' },
+        3.4 );
 
-        /* Beat 5 — Toppings scale up from near-zero */
+        /* Beat 5 — Toppings: subtle scale-in cross-fade */
         spTimeline.fromTo( layers.toppings,
-            { opacity: 0, scale: 0.60 },
-            { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.5)' },
-        4.6 );
+            { opacity: 0, scale: 0.96 },
+            { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' },
+        4.5 );
 
-        /* Beat 6 — Glow halo expands in */
-        spTimeline.fromTo( layers.glow,
-            { opacity: 0, scale: 0.85 },
-            { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' },
-        5.7 );
+        /* Beat 6 — Complete baked pizza: cinematic zoom-out reveal */
+        spTimeline.fromTo( layers.complete,
+            { opacity: 0, scale: 1.06 },
+            { opacity: 1, scale: 1, duration: 1.3, ease: 'power2.out' },
+        5.6 );
 
         /* Beat 7 — CTA reveal; restore pointer-events so it becomes clickable */
         if ( ctaReveal ) {
             spTimeline.fromTo( ctaReveal,
                 { opacity: 0, y: 20, pointerEvents: 'none' },
                 { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.85, ease: 'power2.out' },
-            6.2 );
+            6.7 );
         }
 
         /* Active-panel highlight — each instance stored for scoped cleanup */
@@ -236,12 +236,12 @@
     }
 
     function hideAnimatedLayers() {
-        gsap.set( layers.dough,    { opacity: 0, scale: 0.80, rotation: -6 } );
+        gsap.set( layers.dough,    { opacity: 0, scale: 0.92 } );
         gsap.set( layers.mascot,   { opacity: 0, y: -52 } );
-        gsap.set( layers.sauce,    { opacity: 0, scale: 0.88 } );
-        gsap.set( layers.mozz,     { opacity: 0, y: 24 } );
-        gsap.set( layers.toppings, { opacity: 0, scale: 0.60 } );
-        gsap.set( layers.glow,     { opacity: 0, scale: 0.85 } );
+        gsap.set( layers.sauce,    { opacity: 0 } );
+        gsap.set( layers.mozz,     { opacity: 0 } );
+        gsap.set( layers.toppings, { opacity: 0, scale: 0.96 } );
+        gsap.set( layers.complete, { opacity: 0, scale: 1.06 } );
         if ( ctaReveal ) {
             gsap.set( ctaReveal, { opacity: 0, y: 20 } );
         }

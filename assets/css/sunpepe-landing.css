@@ -401,34 +401,40 @@
     }
 }
 
-/* Scope all .sp-* selectors under .sunpepe-landing to prevent
-   bleed onto other plugins or themes that share class names. */
-.sunpepe-landing .sp-pizza-svg {
+/* ── Image-stack pizza visual ─────────────────────────────────────────────── */
+
+.sunpepe-landing .sp-pizza-stack {
     width: 100%;
-    height: auto;
-    overflow: visible;
+    aspect-ratio: 1 / 1;
+    position: relative;
     filter:
         drop-shadow(0 4px 28px rgba(200, 80, 0, 0.42))
         drop-shadow(0 16px 56px rgba(228, 61, 48, 0.28))
         drop-shadow(0 2px 10px rgba(0, 0, 0, 0.55));
 }
 
-/* ── SVG pizza layers ─────────────────────────────────────────────────────── */
+.sunpepe-landing .sp-pizza-stack .sp-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sunpepe-landing .sp-mascot-wrap {
+    pointer-events: none;
+}
+
+.sunpepe-landing .sp-mascot-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
 
 /* Hidden by default — JS animates them in on scroll.
    Reduced-motion and noscript fallbacks below restore visibility. */
 .sunpepe-landing .sp-layer {
     opacity: 0;
-}
-
-/* SVG transform-box so scale animations use each element's own center */
-.sunpepe-landing .sp-layer--dough,
-.sunpepe-landing .sp-layer--sauce,
-.sunpepe-landing .sp-layer--mozz,
-.sunpepe-landing .sp-layer--toppings,
-.sunpepe-landing .sp-layer--glow {
-    transform-box: fill-box;
-    transform-origin: center center;
 }
 
 /* CTA inside panel 6 — starts hidden; JS fades it in (beat 7).
