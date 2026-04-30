@@ -18,7 +18,7 @@ The only interactive actions allowed are:
 
 The central visual experience is a pinned pizza-making animation. As the user scrolls, a pizza is assembled while the SUN PEPE red pepper mascot acts as the main character. Hebrew content appears around the pinned visual as part of the scroll experience.
 
----
+--
 
 ## 2. Business Details
 
