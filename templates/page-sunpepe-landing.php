@@ -220,31 +220,15 @@ $static_menu = [
                              alt="פיצה מוכנה" width="1254" height="1254"
                              loading="lazy" decoding="async">
 
-                        <!-- Beat 2: SUN PEPE mascot — red pepper character.
-                             All coordinates are absolute (no SVG transform attribute)
-                             so reduced-motion CSS "transform:none !important" cannot
-                             displace this element from its intended position. -->
+                        <!-- Beat 2: SUN PEPE mascot — high-quality PNG replaces inline SVG.
+                             Wrapper class .sp-layer--mascot keeps GSAP targeting intact. -->
                         <div class="sp-layer sp-layer--mascot sp-mascot-wrap" aria-hidden="true">
-                            <svg class="sp-mascot-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="218" y="17" width="9"  height="20" rx="4" fill="#2ecc71"/>
-                                <rect x="227" y="12" width="8"  height="15" rx="4" fill="#27ae60"/>
-                                <ellipse cx="222" cy="107" rx="20" ry="5" fill="rgba(0,0,0,0.20)"/>
-                                <ellipse cx="222" cy="65"  rx="24" ry="33" fill="#e02e2e"/>
-                                <path d="M 210 96 Q 222 115 234 96 Z" fill="#c01818"/>
-                                <ellipse cx="233" cy="65"  rx="8"  ry="23" fill="rgba(110,0,0,0.22)"/>
-                                <ellipse cx="211" cy="47"  rx="7"  ry="11" fill="rgba(255,255,255,0.32)"/>
-                                <ellipse cx="200" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
-                                <ellipse cx="244" cy="70"  rx="11" ry="6.5" fill="#cc2828"/>
-                                <circle cx="213" cy="61" r="7"   fill="white"/>
-                                <circle cx="231" cy="61" r="7"   fill="white"/>
-                                <circle cx="214" cy="62" r="3.5" fill="#141414"/>
-                                <circle cx="232" cy="62" r="3.5" fill="#141414"/>
-                                <circle cx="215" cy="60" r="1.4" fill="white"/>
-                                <circle cx="233" cy="60" r="1.4" fill="white"/>
-                                <ellipse cx="204" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
-                                <ellipse cx="240" cy="72" rx="6"  ry="4"  fill="rgba(255,80,80,0.38)"/>
-                                <path d="M 209 74 Q 222 88 235 74" stroke="#141414" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-                            </svg>
+                            <img class="sp-mascot-img"
+                                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-action.png' ); ?>"
+                                 alt=""
+                                 width="1254" height="1254"
+                                 loading="eager"
+                                 decoding="async">
                         </div>
 
                     </div><!-- /.sp-pizza-stack -->
