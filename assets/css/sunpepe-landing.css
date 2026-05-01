@@ -275,21 +275,17 @@
 .sp-bg-watermark {
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     z-index: 3;
     background-image: url('../images/sunpepe-logo.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: min(115vw, 1800px) auto;
-    opacity: 0.12;
+    background-size: cover;
+    opacity: 0.16;
     mix-blend-mode: screen;
-    filter: brightness(1.15) saturate(1.1);
-}
-
-@media (max-width: 768px) {
-    .sp-bg-watermark {
-        background-size: 160vw auto;
-    }
+    filter: brightness(1.1) saturate(1.05);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
