@@ -119,71 +119,71 @@ $static_menu = [
 <div class="sunpepe-landing" dir="rtl" lang="he">
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 1 — HERO
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="sunpepe-landing__hero" aria-label="עמוד הבית">
-        <div class="sunpepe-landing__container">
-
-            <div class="sunpepe-landing__logo" aria-label="לוגו <?php echo esc_attr( $business_name ); ?>">
-                <span class="sunpepe-landing__logo-text"><?php echo esc_html( $business_name ); ?></span>
-            </div>
-
-            <h1 class="sunpepe-landing__headline">
-                <?php echo esc_html( $hero_headline ); ?>
-            </h1>
-
-            <p class="sunpepe-landing__subheadline">
-                <?php echo esc_html( $hero_subheadline ); ?>
-            </p>
-
-            <div class="sunpepe-landing__badges" role="list">
-                <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $kosher_label ); ?></span>
-                <span class="sunpepe-landing__badge" role="listitem">ישיבה במקום</span>
-                <span class="sunpepe-landing__badge" role="listitem">איסוף עצמי</span>
-                <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $address ); ?></span>
-            </div>
-
-            <div class="sunpepe-landing__hero-ctas">
-                <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-                   class="sunpepe-landing__cta-primary"
-                   aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
-                    <?php echo esc_html( $primary_cta_label ); ?>
-                </a>
-                <p class="sunpepe-landing__phone-inline" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
-            </div>
-
-            <div class="sunpepe-landing__hero-secondary-ctas">
-                <a href="<?php echo esc_url( $waze_url ); ?>"
-                   class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--waze"
-                   target="_blank" rel="noopener noreferrer"
-                   aria-label="נווט אלינו ב-Waze">
-                    נווטו ב-Waze
-                </a>
-                <a href="<?php echo esc_url( $google_maps_url ); ?>"
-                   class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--maps"
-                   target="_blank" rel="noopener noreferrer"
-                   aria-label="נווט אלינו ב-Google Maps">
-                    Google Maps
-                </a>
-                <a href="#sunpepe-menu"
-                   class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--menu"
-                   aria-label="צפייה בתפריט שלנו">
-                    צפייה בתפריט
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 2 — SCROLL ANIMATION (Phase 6)
-         Desktop: stage is CSS-sticky; GSAP scrubs pizza layers on scroll.
-         Mobile: pizza shown static; panels fade in via IntersectionObserver.
+         SECTION 1 — STORYTELLING (Phase 8: hero + animation unified)
+         Desktop: hero text in inline-start (RTL: right) column; large pizza
+                  on inline-end (RTL: left); full-screen sticky stage;
+                  GSAP scrubs pizza layers as user scrolls.
+         Mobile:  hero text → pizza → beat panels stacked vertically.
          Reduced-motion: CSS shows all layers, no GSAP runs.
          No-JS: noscript style in <head> makes all layers visible.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="sunpepe-landing__animation" aria-label="על הפיצה שלנו">
+    <section class="sunpepe-landing__animation" aria-label="SUN PEPE — ספר הפיצה">
         <div class="sunpepe-landing__animation-scene">
+
+            <!-- ── Hero panel: brand intro
+                    Desktop: inline-start column, absolutely positioned.
+                    Mobile:  full-width, stacks before the pizza stage.  ──── -->
+            <div class="sp-story-hero-panel">
+
+                <div class="sunpepe-landing__logo" aria-label="לוגו <?php echo esc_attr( $business_name ); ?>">
+                    <span class="sunpepe-landing__logo-text"><?php echo esc_html( $business_name ); ?></span>
+                </div>
+
+                <h1 class="sunpepe-landing__headline">
+                    <?php echo esc_html( $hero_headline ); ?>
+                </h1>
+
+                <p class="sunpepe-landing__subheadline">
+                    <?php echo esc_html( $hero_subheadline ); ?>
+                </p>
+
+                <div class="sunpepe-landing__badges" role="list">
+                    <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $kosher_label ); ?></span>
+                    <span class="sunpepe-landing__badge" role="listitem">ישיבה במקום</span>
+                    <span class="sunpepe-landing__badge" role="listitem">איסוף עצמי</span>
+                    <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $address ); ?></span>
+                </div>
+
+                <div class="sunpepe-landing__hero-ctas">
+                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
+                       class="sunpepe-landing__cta-primary"
+                       aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
+                        <?php echo esc_html( $primary_cta_label ); ?>
+                    </a>
+                    <p class="sunpepe-landing__phone-inline" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
+                </div>
+
+                <div class="sunpepe-landing__hero-secondary-ctas">
+                    <a href="<?php echo esc_url( $waze_url ); ?>"
+                       class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--waze"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="נווט אלינו ב-Waze">
+                        נווטו ב-Waze
+                    </a>
+                    <a href="<?php echo esc_url( $google_maps_url ); ?>"
+                       class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--maps"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="נווט אלינו ב-Google Maps">
+                        Google Maps
+                    </a>
+                    <a href="#sunpepe-menu"
+                       class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--menu"
+                       aria-label="צפייה בתפריט שלנו">
+                        צפייה בתפריט
+                    </a>
+                </div>
+
+            </div><!-- /.sp-story-hero-panel -->
 
             <!-- ── Pizza stage (CSS sticky on desktop) ──────────────────────── -->
             <div class="sunpepe-landing__animation-stage" aria-hidden="true">
