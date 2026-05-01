@@ -80,6 +80,7 @@
     -moz-osx-font-smoothing: grayscale;
     position: relative;
     z-index: 1;
+    overflow-x: hidden; /* prevent any child from creating horizontal scroll */
 }
 
 /* ── Container ────────────────────────────────────────────────────────────── */
@@ -496,7 +497,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: relative; /* contains ::before glow and absolute-positioned pizza mascot */
 }
 
 .sunpepe-landing__animation-stage::before {
@@ -943,6 +944,81 @@
 
     .sunpepe-landing__logo-text {
         filter: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE & TABLET RESPONSIVE FIXES
+   Tested breakpoints: 360px · 390px · 430px · 480px · 768px · 820px · 899px
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── All screens below desktop breakpoint (< 900px) ─────────────────────── */
+@media (max-width: 899px) {
+
+    /* Beat panels: kill the 55vh min-height that creates ~220vh of wasted empty
+       space on mobile. Mobile has no GSAP pin — panels are just text cards. */
+    .sunpepe-landing__animation-panel {
+        min-height: 0;
+        padding: 1.75rem 1.5rem;
+    }
+
+    /* Section padding: 5.5rem / 6.5rem desktop values are too heavy on mobile */
+    .sunpepe-landing__menu      { padding-block: 3.25rem; }
+    .sunpepe-landing__location  { padding-block: 3.25rem; }
+    .sunpepe-landing__final-cta { padding-block: 3.25rem 2.5rem; }
+
+    /* Animation copy: allow full width; tighten size range for narrow screens */
+    .sunpepe-landing__animation-copy {
+        max-width: 100%;
+        font-size: clamp(1.35rem, 5.5vw, 1.9rem);
+    }
+
+    /* Nav buttons: guarantee 44px touch target (WCAG 2.5.5) */
+    .sunpepe-landing__nav-btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Watermark: background-size:cover zooms the logo very tightly on portrait
+       mobile — lower opacity to avoid competing with text */
+    .sp-bg-watermark { opacity: 0.09; }
+}
+
+/* ── Tablet (600–899px): slightly more generous spacing than phone ────────── */
+@media (min-width: 600px) and (max-width: 899px) {
+    .sunpepe-landing__menu      { padding-block: 4rem; }
+    .sunpepe-landing__location  { padding-block: 4rem; }
+    .sunpepe-landing__final-cta { padding-block: 4rem 3rem; }
+    .sp-menu-mascot { width: clamp(130px, 18vw, 200px); }
+    .sp-cta-mascot  { width: clamp(120px, 17vw, 180px); }
+}
+
+/* ── Small phone (≤ 520px): shrink mascots, tighten CTA headline ─────────── */
+@media (max-width: 520px) {
+
+    /* Mascots: clamp minimums of 150–160px are too large at 360px viewport.
+       Scale them down so they're decorative, not dominant. */
+    .sp-menu-mascot         { width: clamp(90px, 33vw, 140px); margin-bottom: 1.5rem; }
+    .sp-cta-mascot          { width: clamp(90px, 30vw, 130px); margin-bottom: 1.25rem; }
+    .sp-scene-mascot--pizza { width: clamp(55px, 17vw, 95px); }
+
+    /* Final CTA headline: tighten range so it doesn't wrap awkwardly */
+    .sunpepe-landing__final-cta-headline {
+        font-size: clamp(1.5rem, 6.5vw, 2rem);
+    }
+
+    /* Section title: trim bottom margin on small screens */
+    .sunpepe-landing__section-title { margin-bottom: 1.75rem; }
+}
+
+/* ── Very small (≤ 420px): tighten hours grid column gap ─────────────────── */
+@media (max-width: 420px) {
+    .sunpepe-landing__hours {
+        gap: 0.5rem 1.5rem;
+        padding: 1.1rem 1.25rem;
+        font-size: 0.95rem;
     }
 }
 
