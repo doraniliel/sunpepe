@@ -33,6 +33,31 @@
     background-color: #07122f;
 }
 
+/* ── Skip link (keyboard-only, becomes visible on :focus) ────────────────── */
+.sp-skip-link {
+    position: fixed;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sp-orange);
+    color: var(--sp-navy);
+    font-family: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 0 0 var(--sp-radius) var(--sp-radius);
+    z-index: 99999;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: top 0.15s ease;
+}
+
+.sp-skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--sp-navy);
+    outline-offset: 2px;
+}
+
 /* ── Reset & base ─────────────────────────────────────────────────────────── */
 .sunpepe-landing,
 .sunpepe-landing *,
@@ -700,7 +725,7 @@
 .sunpepe-landing__section-note {
     text-align: center;
     font-size: 0.82rem;
-    color: #aaa;
+    color: #636363; /* was #aaa — raised to ≥4.5:1 contrast on --sp-white-bg */
     margin-top: -2rem;
     margin-bottom: 2.75rem;
     letter-spacing: 0.03em;
@@ -919,4 +944,52 @@
     .sunpepe-landing__logo-text {
         filter: none;
     }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION 7 — ACCESSIBILITY STATEMENT
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sunpepe-landing__a11y {
+    padding: 3.5rem 0;
+    background-color: var(--sp-navy-mid);
+    color: var(--sp-cream);
+    border-top: 1px solid rgba(255, 244, 214, 0.08);
+    text-align: center;
+}
+
+.sunpepe-landing__a11y .sunpepe-landing__section-title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: 1.5rem;
+    color: var(--sp-cream);
+}
+
+.sunpepe-landing__a11y p {
+    font-size: 0.92rem;
+    color: var(--sp-cream-muted);
+    line-height: 1.85;
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: 0.85rem;
+}
+
+.sunpepe-landing__a11y a {
+    color: var(--sp-orange);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.sunpepe-landing__a11y a:hover {
+    color: var(--sp-yellow);
+}
+
+.sunpepe-landing__a11y a:focus-visible {
+    outline: 3px solid var(--sp-cream);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.sunpepe-landing__a11y-coordinator {
+    font-size: 0.82rem;
+    color: rgba(255, 244, 214, 0.38);
+    margin-top: 0.5rem;
 }
