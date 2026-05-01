@@ -842,6 +842,31 @@
     margin-inline: auto;
 }
 
+.sunpepe-landing__final-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin: 0 auto 0.25rem;
+    transition: transform var(--sp-transition), filter var(--sp-transition);
+}
+
+.sunpepe-landing__final-cta-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08) drop-shadow(0 6px 18px rgba(255, 159, 28, 0.50));
+}
+
+.sunpepe-landing__final-cta-btn:focus-visible {
+    outline: 3px solid var(--sp-cream);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.sunpepe-landing__final-cta-img {
+    height: clamp(52px, 8vh, 80px);
+    width: auto;
+    display: block;
+}
+
 .sunpepe-landing__phone-display {
     font-size: 1.15rem;
     font-weight: 600;

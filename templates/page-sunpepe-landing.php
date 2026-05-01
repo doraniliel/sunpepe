@@ -395,8 +395,13 @@ $static_menu = [
             </h2>
 
             <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-               class="sunpepe-landing__cta-primary sunpepe-landing__cta-large">
-                <?php echo esc_html( $primary_cta_label ); ?>
+               class="sunpepe-landing__final-cta-btn"
+               aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
+                <img src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.png' ); ?>"
+                     alt="התקשרו כעת"
+                     class="sunpepe-landing__final-cta-img"
+                     loading="lazy"
+                     decoding="async">
             </a>
 
             <p class="sunpepe-landing__phone-display" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
