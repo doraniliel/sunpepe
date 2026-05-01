@@ -276,13 +276,20 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    /* z-index 3: above .sunpepe-landing (z-index:1) so the solid section
+       backgrounds no longer bury this element; still below .sp-fixed-cta
+       (z-index:1000). mix-blend-mode:screen composites the logo over whatever
+       is below — on dark navy it lifts brightness subtly; on white/cream
+       sections screen-blending near-white is invisible, so readability is
+       unaffected on either background type. */
+    z-index: 3;
     background-image: url('../images/sunpepe-logo.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: min(80vw, 1100px) auto;
-    opacity: 0.07;
+    background-size: min(90vw, 1200px) auto;
+    opacity: 0.15;
     mix-blend-mode: screen;
+    filter: brightness(1.2);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
