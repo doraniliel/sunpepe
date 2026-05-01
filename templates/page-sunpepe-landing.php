@@ -17,8 +17,8 @@ $address                = sunpepe_get( 'address',                'הרצל 71, �
 $kosher_label           = sunpepe_get( 'kosher_label',           'כשר' );
 $waze_url               = sunpepe_get( 'waze_url',               'https://waze.com/ul?ll=32.086202,34.814943&navigate=yes&zoom=16' );
 $google_maps_url        = sunpepe_get( 'google_maps_url',        'https://www.google.com/maps?q=32.086202,34.814943' );
-$hero_headline          = sunpepe_get( 'hero_headline',          'פיצה חמה, כשרה, עם אופי של SUN PEPE' );
-$hero_subheadline       = sunpepe_get( 'hero_subheadline',       'פיצרייה פרימיום ברמת גן — לאכילה במקום ולאיסוף עצמי, עם בצק, גבינה ותוספות שעושות חשק להתקשר עכשיו.' );
+$hero_headline          = sunpepe_get( 'hero_headline',          'בא לכם פיצה? סאן פפה על זה.' );
+$hero_subheadline       = sunpepe_get( 'hero_subheadline',       'פיצה כשרה ברמת גן, חמה ומוכנה לאיסוף עצמי או לאכילה במקום.' );
 $primary_cta_label      = sunpepe_get( 'primary_cta_label',      'התקשרו להזמין כעת' );
 $sticky_cta_label       = sunpepe_get( 'sticky_mobile_cta_label','התקשרו כעת' );
 $hours_sun_thu          = sunpepe_get( 'hours_sun_thu',          '10:00–00:00' );
