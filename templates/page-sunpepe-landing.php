@@ -363,10 +363,6 @@ $static_menu = [
                    target="_blank" rel="noopener noreferrer">
                     פתחו ב-Google Maps
                 </a>
-                <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-                   class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--call">
-                    התקשרו להזמין
-                </a>
             </div>
 
         </div>
