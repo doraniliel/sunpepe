@@ -317,9 +317,9 @@
 }
 
 @media (min-width: 900px) {
-    /* Provides the full scroll height: hero panel (150vh) + 6 beat panels (90vh each) */
+    /* Provides the full scroll height: hero panel (100vh) + 6 beat panels (55vh each) = 430vh */
     .sunpepe-landing__animation {
-        height: 700vh;
+        height: 450vh;
         position: relative;
     }
 }
@@ -337,7 +337,7 @@
     .sunpepe-landing__animation-scene {
         display: block;
         position: relative;
-        height: 100%;
+        height: 450vh;
     }
 }
 
@@ -347,9 +347,9 @@
     .sp-story-hero-panel {
         position: absolute;
         inset-block-start: 0;
-        inset-inline-start: 0;
-        width: 36%;
-        height: 150vh;
+        inset-inline-start: 20%;
+        width: 32%;
+        height: 100vh;
         padding-inline: 3rem 2rem;
         padding-block: 3.5rem;
         text-align: start;
@@ -452,12 +452,10 @@
 }
 
 @media (min-width: 900px) {
-    /* Fills the inline-end (RTL: left) portion of the full-screen stage */
+    /* Fills the full stage; text column overlays on top via z-index */
     .sunpepe-landing__pizza-wrap {
         position: absolute;
         inset: 0;
-        /* inset-inline-start: 36% clears the 36%-wide text column (RTL: right side) */
-        inset-inline-start: 36%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -482,8 +480,8 @@
 
 @media (min-width: 900px) {
     .sunpepe-landing .sp-pizza-stack {
-        /* Large, cinematic pizza: grows from 520px to 940px with viewport */
-        width: clamp(520px, 58vw, 940px);
+        /* Large, cinematic pizza: grows from 560px to 980px with viewport */
+        width: clamp(560px, 62vw, 980px);
     }
 }
 
@@ -529,9 +527,9 @@
     /* Absolute column, continues below the hero panel (inline-start, RTL: right) */
     .sunpepe-landing__animation-panels {
         position: absolute;
-        inset-block-start: 150vh;   /* placed immediately below the 150vh hero panel */
-        inset-inline-start: 0;
-        width: 36%;
+        inset-block-start: 100vh;   /* placed immediately below the 100vh hero panel */
+        inset-inline-start: 20%;
+        width: 32%;
         padding: 0;
         z-index: 2;
     }
@@ -552,7 +550,7 @@
 @media (min-width: 900px) {
     .sunpepe-landing__animation-panel {
         min-height: unset;
-        height: 90vh;
+        height: 55vh;
         padding: 3rem 2.5rem;
         border-inline-end: 3px solid rgba(255, 159, 28, 0.15);
         border-inline-start: none;
