@@ -107,13 +107,14 @@ $static_menu = [
 </head>
 <body class="sunpepe-landing-page">
 
-<!-- ── Sticky mobile CTA (visible only on mobile, fixed to bottom) ─────────── -->
-<div class="sunpepe-landing-sticky-cta" role="complementary" aria-label="כפתור חיוג מהיר">
+<!-- ── Fixed top-left CTA (desktop + mobile, always visible) ─────────────── -->
+<div class="sp-fixed-cta" role="complementary" aria-label="כפתור חיוג מהיר">
     <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-       class="sunpepe-landing-sticky-cta__btn"
+       class="sp-fixed-cta__btn"
        aria-label="חייגו אלינו עכשיו: <?php echo esc_attr( $phone_display ); ?>">
         <?php echo esc_html( $sticky_cta_label ); ?>
     </a>
+    <span class="sp-fixed-cta__phone" dir="ltr"><?php echo esc_html( $phone_display ); ?></span>
 </div>
 
 <div class="sunpepe-landing" dir="rtl" lang="he">
@@ -257,37 +258,19 @@ $static_menu = [
             <div class="sunpepe-landing__animation-panels">
 
                 <div class="sunpepe-landing__animation-panel" data-beat="1">
-                    <span class="sp-beat-label">01</span>
                     <p class="sunpepe-landing__animation-copy">מתחילים בבצק טרי</p>
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="2">
-                    <span class="sp-beat-label">02</span>
-                    <p class="sunpepe-landing__animation-copy"><?php echo esc_html( $business_name ); ?> נכנס לעניינים</p>
-                </div>
-
-                <div class="sunpepe-landing__animation-panel" data-beat="3">
-                    <span class="sp-beat-label">03</span>
                     <p class="sunpepe-landing__animation-copy">רוטב עשיר נמרח בדיוק כמו שצריך</p>
                 </div>
 
-                <div class="sunpepe-landing__animation-panel" data-beat="4">
-                    <span class="sp-beat-label">04</span>
+                <div class="sunpepe-landing__animation-panel" data-beat="3">
                     <p class="sunpepe-landing__animation-copy">מוצרלה נמסה מעל הכול</p>
                 </div>
 
-                <div class="sunpepe-landing__animation-panel" data-beat="5">
-                    <span class="sp-beat-label">05</span>
+                <div class="sunpepe-landing__animation-panel" data-beat="4">
                     <p class="sunpepe-landing__animation-copy">תוספות ירקות צבעוניות בלבד</p>
-                </div>
-
-                <div class="sunpepe-landing__animation-panel" data-beat="6">
-                    <span class="sp-beat-label">06</span>
-                    <p class="sunpepe-landing__animation-copy">הפיצה מוכנה — עכשיו רק להתקשר</p>
-                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-                       class="sunpepe-landing__cta-primary sp-cta-reveal">
-                        <?php echo esc_html( $primary_cta_label ); ?>
-                    </a>
                 </div>
 
             </div><!-- /.animation-panels -->
@@ -365,43 +348,7 @@ $static_menu = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 4 — WHY SUN PEPE
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="sunpepe-landing__why" aria-label="למה SUN PEPE">
-        <div class="sunpepe-landing__container">
-            <h2 class="sunpepe-landing__section-title">למה <?php echo esc_html( $business_name ); ?>?</h2>
-            <div class="sunpepe-landing__why-grid">
-
-                <div class="sunpepe-landing__why-card">
-                    <span class="sunpepe-landing__why-icon" aria-hidden="true">✡</span>
-                    <h3><?php echo esc_html( $kosher_label ); ?></h3>
-                    <p>פיצה כשרה, חמה ומדויקת</p>
-                </div>
-
-                <div class="sunpepe-landing__why-card">
-                    <span class="sunpepe-landing__why-icon" aria-hidden="true">⌂</span>
-                    <h3>לאיסוף וישיבה במקום</h3>
-                    <p>בלי סיבוכים, פשוט מגיעים או מתקשרים</p>
-                </div>
-
-                <div class="sunpepe-landing__why-card">
-                    <span class="sunpepe-landing__why-icon" aria-hidden="true">◎</span>
-                    <h3>במרכז רמת גן</h3>
-                    <p><?php echo esc_html( $address ); ?>, קרוב ונגיש למרכז ישראל</p>
-                </div>
-
-                <div class="sunpepe-landing__why-card">
-                    <span class="sunpepe-landing__why-icon" aria-hidden="true">★</span>
-                    <h3>תוספות ירקות טריות</h3>
-                    <p>צבע, טעם ואופי בכל מגש</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 5 — LOCATION & HOURS
+         SECTION 4 — LOCATION & HOURS
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__location" aria-label="מיקום ושעות">
         <div class="sunpepe-landing__container">
