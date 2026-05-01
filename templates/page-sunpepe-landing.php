@@ -220,20 +220,17 @@ $static_menu = [
                              alt="פיצה מוכנה" width="1254" height="1254"
                              loading="lazy" decoding="async">
 
-                        <!-- Beat 2: SUN PEPE mascot — high-quality PNG replaces inline SVG.
-                             Wrapper class .sp-layer--mascot keeps GSAP targeting intact. -->
-                        <div class="sp-layer sp-layer--mascot sp-mascot-wrap" aria-hidden="true">
-                            <img class="sp-mascot-img"
-                                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-action.png' ); ?>"
-                                 alt=""
-                                 width="1254" height="1254"
-                                 loading="eager"
-                                 decoding="async">
-                        </div>
-
                     </div><!-- /.sp-pizza-stack -->
 
                 </div><!-- /.pizza-wrap -->
+
+                <!-- Mascot near pizza — decorative brand element, outside pizza stack -->
+                <img class="sp-scene-mascot--pizza"
+                     src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-pizza.png' ); ?>"
+                     alt="" aria-hidden="true"
+                     width="1254" height="1254"
+                     loading="lazy" decoding="async">
+
             </div><!-- /.animation-stage -->
 
             <!-- ── Scroll copy panels ────────────────────────────────────────── -->
@@ -270,6 +267,13 @@ $static_menu = [
 
             <h2 class="sunpepe-landing__section-title">התפריט שלנו</h2>
             <p class="sunpepe-landing__section-note">המחירים יעודכנו בקרוב</p>
+
+            <!-- Mascot near menu — decorative brand element -->
+            <img class="sp-menu-mascot"
+                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-action.png' ); ?>"
+                 alt="" aria-hidden="true"
+                 width="1254" height="1254"
+                 loading="lazy" decoding="async">
 
             <div class="sunpepe-landing__menu-categories">
 
@@ -373,6 +377,13 @@ $static_menu = [
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__final-cta" aria-label="צרו קשר">
         <div class="sunpepe-landing__container">
+
+            <!-- Mascot near final CTA — decorative brand element -->
+            <img class="sp-cta-mascot"
+                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-main.png' ); ?>"
+                 alt="" aria-hidden="true"
+                 width="1254" height="1254"
+                 loading="lazy" decoding="async">
 
             <h2 class="sunpepe-landing__final-cta-headline">
                 <?php echo esc_html( $final_cta_headline ); ?>

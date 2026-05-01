@@ -38,7 +38,6 @@
 
     var layers = {
         dough   : root.querySelector( '.sp-layer--dough' ),
-        mascot  : root.querySelector( '.sp-layer--mascot' ),
         sauce   : root.querySelector( '.sp-layer--sauce' ),
         mozz    : root.querySelector( '.sp-layer--mozz' ),
         toppings: root.querySelector( '.sp-layer--toppings' ),
@@ -146,13 +145,7 @@
             { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
         0 );
 
-        /* Beat 2 — Mascot drops in from above with a strong bounce */
-        spTimeline.fromTo( layers.mascot,
-            { opacity: 0, y: -52 },
-            { opacity: 1, y: 0, duration: 1.1, ease: 'back.out(2.0)' },
-        1.2 );
-
-        /* Beat 3 — Sauce: cross-fade (cumulative image) */
+        /* Beat 2 — Sauce: cross-fade (cumulative image) */
         spTimeline.fromTo( layers.sauce,
             { opacity: 0 },
             { opacity: 1, duration: 1.1, ease: 'power2.inOut' },
@@ -237,7 +230,6 @@
 
     function hideAnimatedLayers() {
         gsap.set( layers.dough,    { opacity: 0, scale: 0.92 } );
-        gsap.set( layers.mascot,   { opacity: 0, y: -52 } );
         gsap.set( layers.sauce,    { opacity: 0 } );
         gsap.set( layers.mozz,     { opacity: 0 } );
         gsap.set( layers.toppings, { opacity: 0, scale: 0.96 } );

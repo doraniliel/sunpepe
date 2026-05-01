@@ -549,13 +549,36 @@
     object-fit: contain;
 }
 
-.sunpepe-landing .sp-mascot-wrap {
+/* ── Mascot: pizza-stage decoration ──────────────────────────────────────── */
+.sp-scene-mascot--pizza {
+    position: absolute;
+    bottom: 4%;
+    inset-inline-start: 2%;    /* RTL: right side, near pizza edge */
+    width: clamp(120px, 16vw, 260px);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* ── Mascot: menu section decoration ─────────────────────────────────────── */
+.sp-menu-mascot {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    width: clamp(160px, 22vw, 340px);
+    height: auto;
+    object-fit: contain;
     pointer-events: none;
 }
 
-.sunpepe-landing .sp-mascot-img {
-    width: 100%;
-    height: 100%;
+/* ── Mascot: final CTA decoration ─────────────────────────────────────────── */
+.sp-cta-mascot {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+    width: clamp(150px, 20vw, 320px);
+    height: auto;
     object-fit: contain;
     pointer-events: none;
 }
