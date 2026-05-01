@@ -216,28 +216,28 @@
 }
 
 .sp-fixed-cta__btn {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--sp-orange) 0%, #ffb83e 100%);
-    color: var(--sp-navy);
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    font-family: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
-    font-weight: 900;
-    font-size: 0.88rem;
-    letter-spacing: 0.01em;
-    padding: 0.4rem 0.95rem;
-    border-radius: 50px;
-    white-space: nowrap;
-    transition: transform var(--sp-transition), box-shadow var(--sp-transition);
+    transition: transform var(--sp-transition), filter var(--sp-transition);
+    flex-shrink: 0;
 }
 
 .sp-fixed-cta__btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px var(--sp-orange-glow);
+    filter: brightness(1.08) drop-shadow(0 3px 10px rgba(255, 159, 28, 0.45));
 }
 
 .sp-fixed-cta__btn:focus-visible {
     outline: 3px solid var(--sp-cream);
-    outline-offset: 3px;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.sp-fixed-cta__img {
+    height: clamp(34px, 4.5vh, 50px);
+    width: auto;
+    display: block;
 }
 
 .sp-fixed-cta__phone {
@@ -263,6 +263,24 @@
     .sunpepe-landing__final-cta {
         padding-bottom: 2rem;
     }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SITE-WIDE BRAND WATERMARK
+   Fixed behind all content. mix-blend-mode:screen at low opacity brightens
+   the logo area on dark backgrounds without obscuring text on any section.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sp-bg-watermark {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url('../images/sunpepe-logo.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: min(65vw, 860px) auto;
+    opacity: 0.06;
+    mix-blend-mode: screen;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

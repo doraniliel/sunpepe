@@ -107,15 +107,22 @@ $static_menu = [
 </head>
 <body class="sunpepe-landing-page">
 
-<!-- ── Fixed top-left CTA (desktop + mobile, always visible) ─────────────── -->
+<!-- ── Fixed top-center CTA (desktop + mobile, always visible) ───────────── -->
 <div class="sp-fixed-cta" role="complementary" aria-label="כפתור חיוג מהיר">
     <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
        class="sp-fixed-cta__btn"
-       aria-label="חייגו אלינו עכשיו: <?php echo esc_attr( $phone_display ); ?>">
-        <?php echo esc_html( $sticky_cta_label ); ?>
+       aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
+        <img class="sp-fixed-cta__img"
+             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.png' ); ?>"
+             alt="התקשרו כעת"
+             loading="eager"
+             decoding="async">
     </a>
     <span class="sp-fixed-cta__phone" dir="ltr"><?php echo esc_html( $phone_display ); ?></span>
 </div>
+
+<!-- ── Site-wide brand watermark — fixed behind all content ──────────────── -->
+<div class="sp-bg-watermark" aria-hidden="true"></div>
 
 <div class="sunpepe-landing" dir="rtl" lang="he">
 
