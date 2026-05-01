@@ -23,7 +23,7 @@ $primary_cta_label      = sunpepe_get( 'primary_cta_label',      'התקשרו �
 $sticky_cta_label       = sunpepe_get( 'sticky_mobile_cta_label','התקשרו כעת' );
 $hours_sun_thu          = sunpepe_get( 'hours_sun_thu',          '10:00–00:00' );
 $hours_fri              = sunpepe_get( 'hours_fri',              '10:00–15:00' );
-$final_cta_headline     = sunpepe_get( 'final_cta_headline',     'הפיצה מוכנה. אתם רק צריכים להתקשר.' );
+$final_cta_headline     = sunpepe_get( 'final_cta_headline',     'למה אתם מחכים התקשרו להזמין כעת!' );
 $final_cta_details      = sunpepe_get( 'final_cta_details',      'SUN PEPE — הרצל 71, רמת גן | כשר | איסוף עצמי וישיבה במקום' );
 
 /* ── Dynamic menu data (falls back to static list when CPT has no items) ─────── */
@@ -155,15 +155,6 @@ $static_menu = [
                     <span class="sunpepe-landing__badge" role="listitem"><?php echo esc_html( $address ); ?></span>
                 </div>
 
-                <div class="sunpepe-landing__hero-ctas">
-                    <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
-                       class="sunpepe-landing__cta-primary"
-                       aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
-                        <?php echo esc_html( $primary_cta_label ); ?>
-                    </a>
-                    <p class="sunpepe-landing__phone-inline" dir="ltr"><?php echo esc_html( $phone_display ); ?></p>
-                </div>
-
                 <div class="sunpepe-landing__hero-secondary-ctas">
                     <a href="<?php echo esc_url( $waze_url ); ?>"
                        class="sunpepe-landing__nav-btn sunpepe-landing__nav-btn--waze"
@@ -188,6 +179,14 @@ $static_menu = [
 
             <!-- ── Pizza stage (CSS sticky on desktop) ──────────────────────── -->
             <div class="sunpepe-landing__animation-stage" aria-hidden="true">
+
+                <!-- Brand logo — large, in the right visual area of the opening scene -->
+                <img class="sp-brand-logo"
+                     src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/sunpepe-logo.png' ); ?>"
+                     alt="SUN PEPE"
+                     loading="eager"
+                     decoding="async">
+
                 <div class="sunpepe-landing__pizza-wrap">
 
                     <div class="sp-pizza-stack" role="img" aria-label="פיצה של SUN PEPE">
@@ -270,7 +269,7 @@ $static_menu = [
                 </div>
 
                 <div class="sunpepe-landing__animation-panel" data-beat="4">
-                    <p class="sunpepe-landing__animation-copy">תוספות ירקות צבעוניות בלבד</p>
+                    <p class="sunpepe-landing__animation-copy">שמים את התוספות שאתם אוהבים</p>
                 </div>
 
             </div><!-- /.animation-panels -->

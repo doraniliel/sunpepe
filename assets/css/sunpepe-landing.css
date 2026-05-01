@@ -191,14 +191,15 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FIXED TOP-LEFT CTA (desktop + mobile)
-   Physical top-left corner — uses left/top (not logical properties) so it
-   stays at the physical corner regardless of RTL direction.
+   FIXED TOP-CENTER CTA (desktop + mobile)
+   Centred horizontally using left:50%+translateX(-50%) — physical centering,
+   unaffected by RTL direction.
    ═══════════════════════════════════════════════════════════════════════════ */
 .sp-fixed-cta {
     position: fixed;
-    top: 1.1rem;
-    left: 1.1rem;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -211,6 +212,7 @@
     padding: 0.45rem 1rem 0.45rem 0.6rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 159, 28, 0.10);
     direction: ltr;
+    white-space: nowrap;
 }
 
 .sp-fixed-cta__btn {
@@ -331,6 +333,31 @@
 
 .sunpepe-landing__hero-secondary-ctas {
     margin-top: 1.5rem;
+}
+
+/* ── Brand logo — large image in the opening scene ───────────────────────── */
+
+.sp-brand-logo {
+    display: block;
+    width: min(92vw, 520px);
+    height: auto;
+    margin: 2.5rem auto 0;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.40));
+}
+
+@media (min-width: 900px) {
+    /* Absolute inside the full-screen sticky stage.
+       Positioned in the right-side visual area (inline-start in RTL = right),
+       above the pizza. Does not cover the text card on the physical left. */
+    .sp-brand-logo {
+        position: absolute;
+        top: 2rem;
+        inset-inline-start: 5%;   /* RTL: 5% from right edge */
+        width: clamp(420px, 48vw, 900px);
+        margin: 0;
+        z-index: 2;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
