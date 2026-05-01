@@ -87,19 +87,25 @@ class Sunpepe_Menu_Post_Type {
     /**
      * Create default menu categories once (idempotent — skips if already seeded).
      * Uses explicit English slugs to avoid URL-encoding issues with Hebrew.
+     * Option key bumped to v2 so sites with the old 6-category set get the
+     * correct 9 categories on next page load. Old empty categories are harmless
+     * (hide_empty:true in get_grouped_items keeps them off the frontend).
      */
     public static function maybe_seed_terms() {
-        if ( get_option( 'sunpepe_terms_seeded' ) ) {
+        if ( get_option( 'sunpepe_terms_seeded_v2' ) ) {
             return;
         }
 
         $defaults = [
-            'פיצות'  => 'pizzas',
-            'סלטים'  => 'salads',
-            'מאפים'  => 'pastries',
-            'פסטות'  => 'pastas',
-            'שתייה'  => 'drinks',
-            'תוספות' => 'extras',
+            'פיצה קלאסית'   => 'pizza-classic',
+            'המיוחדות שלנו' => 'pizza-specials',
+            'תוספות לפיצה'  => 'pizza-toppings',
+            'סלטים'          => 'salads',
+            'מאפים'          => 'pastries',
+            'פסטות'          => 'pastas',
+            'קינוחים'        => 'desserts',
+            'שתייה'          => 'drinks',
+            'מבצעים שלנו'   => 'specials',
         ];
 
         foreach ( $defaults as $name => $slug ) {
@@ -108,7 +114,7 @@ class Sunpepe_Menu_Post_Type {
             }
         }
 
-        update_option( 'sunpepe_terms_seeded', true );
+        update_option( 'sunpepe_terms_seeded_v2', true );
     }
 
     /* ── Template query helper ───────────────────────────────────────────── */

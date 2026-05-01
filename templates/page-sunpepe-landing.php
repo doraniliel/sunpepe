@@ -34,32 +34,162 @@ $use_dynamic_menu = ! empty( $grouped_items );
 /* ── Static fallback menu (shown when no CPT items are published yet) ────────── */
 
 $static_menu = [
-    'פיצות' => [
-        'פיצה קלאסית',
-        'פיצה מוצרלה',
-        'פיצה שמנת / אלפרדו',
-        'פיצה פסטו',
+    [
+        'name'  => 'פיצה קלאסית',
+        'items' => [
+            [ 'name' => 'משולש',       'price' => '₪12', 'desc' => '' ],
+            [ 'name' => 'אישית',       'price' => '₪25', 'desc' => '' ],
+            [ 'name' => 'משפחתית',     'price' => '₪45', 'desc' => '' ],
+            [ 'name' => 'ענקית',       'price' => '₪55', 'desc' => '' ],
+        ],
     ],
-    'סלטים' => [
-        'סלט יווני',
-        'סלט טונה',
-        'סלט סאן פפה',
+    [
+        'name'  => 'המיוחדות שלנו',
+        'items' => [
+            [
+                'name'  => 'פיצה אננס מוצרלה זיתים',
+                'price' => '',
+                'desc'  => 'אישית ₪45 · משפחתית ₪59 · ענקית ₪75',
+            ],
+            [
+                'name'  => 'פיצה מוצרלה',
+                'price' => '',
+                'desc'  => "עגבניות שרי, בזיליקום / ברוקולי ופרמזן\nמשולש ₪15 · אישית ₪35 · משפחתית ₪52 · ענקית ₪65",
+            ],
+            [
+                'name'  => 'פיצה שמנת / אלפרדו',
+                'price' => '',
+                'desc'  => "עם פטריות טריות\nמשולש ₪17 · אישית ₪39 · משפחתית ₪65 · ענקית ₪79",
+            ],
+            [
+                'name'  => 'פיצה פסטו',
+                'price' => '',
+                'desc'  => "עגבניות שרי מבושלות ופרמזן\nמשולש ₪17 · אישית ₪35 · משפחתית ₪59 · ענקית ₪75",
+            ],
+        ],
     ],
-    'מאפים' => [
-        'פוקצ׳ה',
-        'לחם שום',
-        'מלוואח פיצה',
+    [
+        'name'  => 'תוספות לפיצה',
+        'items' => [
+            [
+                'name'  => 'תוספות רגילות',
+                'price' => '₪4 / ₪8',
+                'desc'  => 'תירס, זיתים ירוקים, זיתים שחורים, פלפל חריף, פלפל שיפקה, עגבנייה טרייה, עגבניות שרי, בצל לבן, בצל סגול, פלפל אדום, פלפל צהוב',
+            ],
+            [
+                'name'  => 'תוספות מיוחדות',
+                'price' => '₪5 / ₪10',
+                'desc'  => 'פטריות טריות, טונה, אנשובי, בולגרית, אקסטרה גבינה, מוצרלה, אננס, בטטה, חציל קלוי',
+            ],
+        ],
     ],
-    'פסטות' => [
-        'פסטה שמנת ופטריות',
-        'פסטה רוזה',
-        'פסטה פסטו',
+    [
+        'name'  => 'סלטים',
+        'items' => [
+            [
+                'name'  => 'סלט יווני',
+                'price' => '₪40',
+                'desc'  => 'חסה, מלפפון, עגבנייה, בצל, זיתים שחורים וגבינה בולגרית',
+            ],
+            [
+                'name'  => 'סלט טונה',
+                'price' => '₪40',
+                'desc'  => 'חסה, עגבניות שרי, מלפפון, תירס, פטריות טריות וטונה',
+            ],
+            [
+                'name'  => 'סלט סאן פפה',
+                'price' => '₪40',
+                'desc'  => 'חסה, עלי בזיליקום, מלפפון, עגבניות שרי, בצל, תירס, פטריות ופלפל חריף',
+            ],
+        ],
     ],
-    'שתייה' => [
-        'בקבוק שתייה',
+    [
+        'name'  => 'מאפים',
+        'items' => [
+            [
+                'name'  => 'זיווה אישית / ענקית',
+                'price' => '₪38',
+                'desc'  => 'כולל תוספת אחת לבחירה',
+            ],
+            [
+                'name'  => 'לחם שום מיוחד עם גבינה',
+                'price' => '₪35',
+                'desc'  => '',
+            ],
+            [
+                'name'  => 'מלאווח מגולגל',
+                'price' => '₪28',
+                'desc'  => 'טחינה, רסק וביצה',
+            ],
+            [
+                'name'  => 'מלאווח פיצה',
+                'price' => '₪28',
+                'desc'  => '',
+            ],
+        ],
     ],
-    'תוספות' => [
-        'תוספת לפיצה',
+    [
+        'name'  => 'פסטות',
+        'items' => [
+            [
+                'name'  => 'פסטה שמנת',
+                'price' => '₪42',
+                'desc'  => 'ופטריות טריות',
+            ],
+            [
+                'name'  => 'פסטה רוזה',
+                'price' => '₪42',
+                'desc'  => 'עגבניות ופרמזן',
+            ],
+            [
+                'name'  => 'פסטה פסטו',
+                'price' => '₪42',
+                'desc'  => 'בזיליקום, עגבניות שרי ופרמזן',
+            ],
+            [
+                'name'  => 'תוספת הקרמה',
+                'price' => '₪10',
+                'desc'  => 'צהובה / עמק / מוצרלה / טבעונית',
+            ],
+        ],
+    ],
+    [
+        'name'  => 'קינוחים',
+        'items' => [
+            [ 'name' => 'פנקוטה',           'price' => '₪15', 'desc' => '' ],
+            [ 'name' => 'מלבי שמנת',        'price' => '₪15', 'desc' => '' ],
+            [ 'name' => 'מוס שוקולד / לבן', 'price' => '₪15', 'desc' => '' ],
+            [ 'name' => 'קרם בוואריה',       'price' => '₪15', 'desc' => '' ],
+            [ 'name' => 'קדאיף',            'price' => '₪15', 'desc' => '' ],
+            [ 'name' => 'עוגת גבינה',        'price' => '₪15', 'desc' => '' ],
+        ],
+    ],
+    [
+        'name'  => 'שתייה',
+        'items' => [
+            [ 'name' => 'בקבוק 1.5 ליטר',                'price' => '₪14',          'desc' => '' ],
+            [ 'name' => 'בקבוק קטן זכוכית / פלסטיק',     'price' => '₪10',          'desc' => '' ],
+            [ 'name' => 'פחית 330 מ"ל',                  'price' => '₪9',           'desc' => '' ],
+            [ 'name' => 'טרופית',                         'price' => '₪3',           'desc' => '' ],
+            [ 'name' => 'ברד קטן / גדול / ענק',           'price' => '₪5 / ₪7 / ₪9', 'desc' => '' ],
+            [ 'name' => 'אייס קפה קטן / גדול / ענק',      'price' => '₪7 / ₪10 / ₪15', 'desc' => '' ],
+            [ 'name' => 'מיץ טבעי 350 / 500 מ"ל',        'price' => '₪15 / ₪22',   'desc' => '' ],
+        ],
+    ],
+    [
+        'name'  => 'מבצעים שלנו',
+        'items' => [
+            [
+                'name'  => '2 מגשים משפחתיים + שתייה 1.5 ליטר + קינוח',
+                'price' => '₪99',
+                'desc'  => '',
+            ],
+            [
+                'name'  => 'מגש ענק + 2 תוספות + לחם שום + 2 קינוחים + שתייה',
+                'price' => '₪99',
+                'desc'  => '',
+            ],
+        ],
     ],
 ];
 ?>
@@ -262,14 +392,13 @@ $static_menu = [
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          SECTION 3 — MENU
-         Shows CPT items when staff have added them; static fallback otherwise.
-         All prices start at ₪0 and are edited in WordPress admin → פריטי תפריט.
+         Shows CPT items when published via WordPress admin → פריטי תפריט.
+         Falls back to $static_menu (real prices) when no CPT items are published.
          ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sunpepe-landing__menu" id="sunpepe-menu" aria-label="תפריט">
         <div class="sunpepe-landing__container">
 
             <h2 class="sunpepe-landing__section-title">התפריט שלנו</h2>
-            <p class="sunpepe-landing__section-note">המחירים יעודכנו בקרוב</p>
 
             <!-- Mascot near menu — decorative brand element -->
             <img class="sp-menu-mascot"
@@ -312,18 +441,27 @@ $static_menu = [
 
             <?php else : /* Static fallback — shown before staff add CPT items */ ?>
 
-                <?php foreach ( $static_menu as $category_name => $item_names ) : ?>
+                <?php foreach ( $static_menu as $group ) : ?>
                     <div class="sunpepe-landing__menu-category">
                         <h3 class="sunpepe-landing__menu-category-title">
-                            <?php echo esc_html( $category_name ); ?>
+                            <?php echo esc_html( $group['name'] ); ?>
                         </h3>
                         <ul class="sunpepe-landing__menu-items" role="list">
-                            <?php foreach ( $item_names as $item_name ) : ?>
+                            <?php foreach ( $group['items'] as $item ) : ?>
                             <li class="sunpepe-landing__menu-item">
                                 <span class="sunpepe-landing__menu-item-name">
-                                    <?php echo esc_html( $item_name ); ?>
+                                    <?php echo esc_html( $item['name'] ); ?>
+                                    <?php if ( ! empty( $item['desc'] ) ) : ?>
+                                        <span class="sunpepe-landing__menu-item-desc">
+                                            <?php echo esc_html( $item['desc'] ); ?>
+                                        </span>
+                                    <?php endif; ?>
                                 </span>
-                                <span class="sunpepe-landing__menu-item-price" dir="ltr">₪0</span>
+                                <?php if ( ! empty( $item['price'] ) ) : ?>
+                                <span class="sunpepe-landing__menu-item-price" dir="ltr">
+                                    <?php echo esc_html( $item['price'] ); ?>
+                                </span>
+                                <?php endif; ?>
                             </li>
                             <?php endforeach; ?>
                         </ul>

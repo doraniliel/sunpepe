@@ -80,7 +80,7 @@
     -moz-osx-font-smoothing: grayscale;
     position: relative;
     z-index: 1;
-    overflow-x: hidden; /* prevent any child from creating horizontal scroll */
+    overflow-x: clip; /* clip without creating a scroll container — preserves position:sticky on children */
 }
 
 /* ── Container ────────────────────────────────────────────────────────────── */
@@ -805,6 +805,18 @@
     unicode-bidi: plaintext;
     flex-shrink: 0;
     padding-inline-start: 1rem;
+    white-space: nowrap;
+}
+
+/* Description sub-line — ingredient list or size/price tiers below item name */
+.sunpepe-landing__menu-item-desc {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.80rem;
+    font-weight: 400;
+    color: #636363;
+    white-space: pre-line; /* preserves \n separating description from price tiers */
+    line-height: 1.5;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -955,11 +967,25 @@
 /* ── All screens below desktop breakpoint (< 900px) ─────────────────────── */
 @media (max-width: 899px) {
 
-    /* Beat panels: kill the 55vh min-height that creates ~220vh of wasted empty
-       space on mobile. Mobile has no GSAP pin — panels are just text cards. */
+    /* Scene layout: stretch so stage spans full column width for sticky to work */
+    .sunpepe-landing__animation-scene { align-items: stretch; }
+
+    /* Animation stage: sticky so the pizza stays in view as panels scroll past.
+       background-color matches page so layers below don't bleed through. */
+    .sunpepe-landing__animation-stage {
+        position: sticky;
+        top: 4.5rem;
+        z-index: 2;
+        max-width: 100%;
+        padding: 0.75rem 1.5rem 0.5rem;
+        background-color: var(--sp-navy);
+    }
+
+    /* Beat panels: min-height 38vh keeps each panel tall enough so the sticky
+       pizza stage is visibly anchored while the user scrolls through the story. */
     .sunpepe-landing__animation-panel {
-        min-height: 0;
-        padding: 1.75rem 1.5rem;
+        min-height: 38vh;
+        padding: 2rem 1.5rem;
     }
 
     /* Section padding: 5.5rem / 6.5rem desktop values are too heavy on mobile */

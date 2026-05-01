@@ -4,7 +4,7 @@
  * Phase 6: GSAP ScrollTrigger scroll animation.
  *
  * Desktop  — scrubbed timeline; CSS-sticky stage; pizza layers animate in.
- * Mobile   — all layers shown immediately; panels fade in on scroll.
+ * Mobile   — dough shown first; sauce/mozz/toppings+complete reveal per panel.
  * Reduced  — GSAP never runs; CSS opacity:1 !important shows everything.
  * No-JS    — <noscript> style in <head> makes all layers visible.
  *
@@ -99,7 +99,6 @@
                 lastMode = newMode;
                 killOwnTriggers();
                 if ( nowMobile ) {
-                    showAllLayers();
                     initMobile();
                 } else {
                     hideAnimatedLayers();
@@ -195,13 +194,30 @@
        Panels fade up as they enter the viewport (no pinning).
        ════════════════════════════════════════════════════════════════════════ */
     function initMobile() {
-        showAllLayers();
+        /* Start with only dough visible — pizza story builds panel by panel. */
+        hideAnimatedLayers();
+        gsap.set( layers.dough, { opacity: 1, scale: 1 } );
 
-        panelEls.forEach( function ( panel ) {
+        /*
+         * panelReveal[i] — layer(s) that cross-fade in when panel i enters view.
+         * Panel 0 (בצק)    — dough already shown; no extra reveal.
+         * Panel 1 (רוטב)   — sauce.
+         * Panel 2 (מוצרלה) — mozz.
+         * Panel 3 (תוספות) — toppings + complete pizza together.
+         */
+        var panelReveal = [
+            null,
+            [ layers.sauce ],
+            [ layers.mozz ],
+            [ layers.toppings, layers.complete ],
+        ];
+
+        panelEls.forEach( function ( panel, i ) {
+            /* Panel text fade-up */
             var tween = gsap.from( panel, {
                 opacity : 0,
-                y       : 22,
-                duration: 0.55,
+                y       : 20,
+                duration: 0.45,
                 ease    : 'power2.out',
                 scrollTrigger: {
                     trigger      : panel,
@@ -209,9 +225,43 @@
                     toggleActions: 'play none none none',
                 },
             } );
-            /* Store the embedded ST so it's killed on breakpoint switch */
             if ( tween && tween.scrollTrigger ) {
                 spTriggers.push( tween.scrollTrigger );
+            }
+
+            /* Pizza layer reveal tied to this panel entering view */
+            var reveal  = panelReveal[ i ];
+            var isLast  = ( i === panelEls.length - 1 );
+            if ( ( reveal && reveal.length ) || ( isLast && ctaReveal ) ) {
+                var st = ScrollTrigger.create( {
+                    trigger: panel,
+                    start  : 'top 60%',
+                    once   : true,
+                    onEnter: function () {
+                        if ( reveal ) {
+                            reveal.forEach( function ( layer, j ) {
+                                gsap.to( layer, {
+                                    opacity : 1,
+                                    scale   : 1,
+                                    duration: 0.5,
+                                    delay   : j * 0.22,
+                                    ease    : 'power2.out',
+                                } );
+                            } );
+                        }
+                        if ( isLast && ctaReveal ) {
+                            gsap.to( ctaReveal, {
+                                opacity     : 1,
+                                y           : 0,
+                                pointerEvents: 'auto',
+                                duration    : 0.5,
+                                delay       : 0.6,
+                                ease        : 'power2.out',
+                            } );
+                        }
+                    },
+                } );
+                spTriggers.push( st );
             }
         } );
     }
