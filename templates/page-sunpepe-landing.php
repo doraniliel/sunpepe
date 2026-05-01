@@ -407,31 +407,15 @@ $static_menu = [
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         SECTION 7 — ACCESSIBILITY STATEMENT
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="sunpepe-landing__a11y" id="sp-accessibility" aria-labelledby="sp-a11y-heading">
-        <div class="sunpepe-landing__container">
-
-            <h2 class="sunpepe-landing__section-title" id="sp-a11y-heading">הצהרת נגישות</h2>
-
-            <p>האתר נבנה במטרה להיות נגיש ושימושי לכלל המשתמשים, לרבות אנשים עם מוגבלויות. נעשו התאמות נגישות בהתאם לעקרונות תקן ישראלי 5568 והנחיות WCAG 2.0 ברמה AA, ככל האפשר במסגרת דף הנחיתה הנוכחי.</p>
-
-            <p>באתר קיימים קישורי חיוג, ניווט, תפריט טקסטואלי, תמיכה בניווט מקלדת, התאמות להפחתת תנועה, וטקסטים חלופיים או סימון דקורטיבי לתמונות.</p>
-
-            <p>אם נתקלתם בבעיית נגישות באתר, ניתן לפנות אלינו בטלפון:
-                <a href="tel:<?php echo esc_attr( $phone_tel ); ?>" dir="ltr">
-                    <?php echo esc_html( $phone_display ); ?>
-                </a>.
-                נשתדל לטפל בפנייה בהקדם.
-            </p>
-
-            <!-- להוספת רכז נגישות בעתיד:
-            <p class="sunpepe-landing__a11y-coordinator">רכז נגישות: [שם] | [דוא"ל] | [טלפון]</p>
-            -->
-
-        </div>
-    </section>
+    <!-- ── Footer: accessibility statement link ─────────────────────────── -->
+    <footer class="sunpepe-landing__footer" role="contentinfo">
+        <a class="sunpepe-landing__a11y-link"
+           href="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/accessibility.html' ); ?>"
+           target="_blank"
+           rel="noopener noreferrer">
+            הצהרת נגישות
+        </a>
+    </footer>
 
 </div><!-- /.sunpepe-landing -->
 

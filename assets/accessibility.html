@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצהרת נגישות — סאן פפה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+            background-color: #07122f;
+            color: #fff4d6;
+            direction: rtl;
+            line-height: 1.75;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(11, 31, 77, 0.95);
+            border-bottom: 1px solid rgba(255, 159, 28, 0.25);
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            background: linear-gradient(135deg, #ff9f1c 0%, #ffd166 50%, #ff9f1c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .back-link {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 244, 214, 0.55);
+            text-decoration: none;
+            padding: 0.35rem 0.9rem;
+            border: 1px solid rgba(255, 244, 214, 0.20);
+            border-radius: 50px;
+            margin-inline-start: auto;
+            transition: color 0.18s, border-color 0.18s;
+        }
+
+        .back-link:hover { color: #fff4d6; border-color: rgba(255, 244, 214, 0.50); }
+        .back-link:focus-visible { outline: 3px solid #fff4d6; outline-offset: 3px; border-radius: 50px; }
+
+        main {
+            flex: 1;
+            max-width: 760px;
+            width: 100%;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        h1 {
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            font-weight: 900;
+            color: #ff9f1c;
+            margin-bottom: 0.5rem;
+            line-height: 1.15;
+        }
+
+        .subtitle {
+            font-size: 0.82rem;
+            color: rgba(255, 244, 214, 0.45);
+            margin-bottom: 2.75rem;
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #ffd166;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        p {
+            font-size: 1rem;
+            color: rgba(255, 244, 214, 0.82);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #ff9f1c;
+            text-underline-offset: 3px;
+        }
+
+        a:focus-visible {
+            outline: 3px solid #fff4d6;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255, 244, 214, 0.10);
+            margin: 2rem 0;
+        }
+
+        .coordinator-box {
+            background: rgba(255, 244, 214, 0.04);
+            border: 1px solid rgba(255, 244, 214, 0.10);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.92rem;
+            color: rgba(255, 244, 214, 0.55);
+        }
+
+        .coordinator-box strong {
+            display: block;
+            color: rgba(255, 244, 214, 0.75);
+            margin-bottom: 0.35rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.78rem;
+            color: rgba(255, 244, 214, 0.28);
+            border-top: 1px solid rgba(255, 244, 214, 0.06);
+        }
+
+        @media (max-width: 520px) {
+            main { margin-top: 2rem; }
+            .back-link { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="brand" href="/">SUN PEPE</a>
+    <a class="back-link" href="javascript:history.back()">← חזרה לאתר</a>
+</header>
+
+<main>
+    <h1>הצהרת נגישות</h1>
+    <p class="subtitle">עדכון אחרון: 2025</p>
+
+    <p>
+        האתר נבנה במטרה להיות נגיש ושימושי לכלל המשתמשים, לרבות אנשים עם מוגבלויות.
+        נעשו התאמות נגישות בהתאם לעקרונות תקן ישראלי 5568 והנחיות WCAG 2.0 ברמה AA,
+        ככל האפשר במסגרת דף הנחיתה הנוכחי.
+    </p>
+
+    <h2>התאמות נגישות שבוצעו</h2>
+    <p>
+        באתר קיימים קישורי חיוג, ניווט, תפריט טקסטואלי, תמיכה בניווט מקלדת,
+        התאמות להפחתת תנועה, וטקסטים חלופיים או סימון דקורטיבי לתמונות.
+        הדף כולל קישור דילוג לתוכן המרכזי, מבנה כותרות הגיוני, ועמידה בדרישות ניגודיות
+        צבעים ברמה AA לטקסט רגיל וטקסט גדול.
+    </p>
+
+    <h2>פנייה בנושא נגישות</h2>
+    <p>
+        אם נתקלתם בבעיית נגישות באתר, ניתן לפנות אלינו בטלפון:
+        <a href="tel:+972509077774" dir="ltr">050-907-7774</a>.
+        נשתדל לטפל בפנייה בהקדם.
+    </p>
+
+    <hr class="divider">
+
+    <div class="coordinator-box">
+        <strong>רכז / רכזת נגישות</strong>
+        <!-- עדכנו את הפרטים הבאים כאשר ימונה רכז נגישות רשמי -->
+        שם: —<br>
+        דוא"ל: —<br>
+        טלפון: <a href="tel:+972509077774" dir="ltr">050-907-7774</a>
+    </div>
+
+</main>
+
+<footer>
+    &copy; סאן פפה — הרצל 71, רמת גן | פיצה כשרה
+</footer>
+
+</body>
+</html>

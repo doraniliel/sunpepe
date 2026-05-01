@@ -947,49 +947,30 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SECTION 7 — ACCESSIBILITY STATEMENT
+   FOOTER — ACCESSIBILITY LINK
    ═══════════════════════════════════════════════════════════════════════════ */
-.sunpepe-landing__a11y {
-    padding: 3.5rem 0;
-    background-color: var(--sp-navy-mid);
-    color: var(--sp-cream);
-    border-top: 1px solid rgba(255, 244, 214, 0.08);
+.sunpepe-landing__footer {
+    padding: 1.25rem 1.5rem;
     text-align: center;
+    background-color: var(--sp-navy);
+    border-top: 1px solid rgba(255, 244, 214, 0.07);
 }
 
-.sunpepe-landing__a11y .sunpepe-landing__section-title {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
-    margin-bottom: 1.5rem;
+.sunpepe-landing__a11y-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 244, 214, 0.45);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--sp-transition);
+}
+
+.sunpepe-landing__a11y-link:hover {
     color: var(--sp-cream);
 }
 
-.sunpepe-landing__a11y p {
-    font-size: 0.92rem;
-    color: var(--sp-cream-muted);
-    line-height: 1.85;
-    max-width: 720px;
-    margin-inline: auto;
-    margin-bottom: 0.85rem;
-}
-
-.sunpepe-landing__a11y a {
-    color: var(--sp-orange);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.sunpepe-landing__a11y a:hover {
-    color: var(--sp-yellow);
-}
-
-.sunpepe-landing__a11y a:focus-visible {
+.sunpepe-landing__a11y-link:focus-visible {
     outline: 3px solid var(--sp-cream);
-    outline-offset: 2px;
+    outline-offset: 3px;
     border-radius: 2px;
-}
-
-.sunpepe-landing__a11y-coordinator {
-    font-size: 0.82rem;
-    color: rgba(255, 244, 214, 0.38);
-    margin-top: 0.5rem;
 }
