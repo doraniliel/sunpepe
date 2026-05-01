@@ -116,7 +116,7 @@ $static_menu = [
        class="sp-fixed-cta__btn"
        aria-label="חייגו לסאן פפה: <?php echo esc_attr( $phone_display ); ?>">
         <img class="sp-fixed-cta__img"
-             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.png' ); ?>"
+             src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.webp' ); ?>"
              alt="התקשרו כעת"
              loading="eager"
              decoding="async">
@@ -229,7 +229,7 @@ $static_menu = [
 
                 <!-- Mascot near pizza — decorative brand element, outside pizza stack -->
                 <img class="sp-scene-mascot--pizza"
-                     src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-pizza.png' ); ?>"
+                     src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-pizza.webp' ); ?>"
                      alt="" aria-hidden="true"
                      width="1254" height="1254"
                      loading="lazy" decoding="async">
@@ -273,7 +273,7 @@ $static_menu = [
 
             <!-- Mascot near menu — decorative brand element -->
             <img class="sp-menu-mascot"
-                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-action.png' ); ?>"
+                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-action.webp' ); ?>"
                  alt="" aria-hidden="true"
                  width="1254" height="1254"
                  loading="lazy" decoding="async">
@@ -379,7 +379,7 @@ $static_menu = [
 
             <!-- Mascot near final CTA — decorative brand element -->
             <img class="sp-cta-mascot"
-                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-main.png' ); ?>"
+                 src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/mascot-main.webp' ); ?>"
                  alt="" aria-hidden="true"
                  width="1254" height="1254"
                  loading="lazy" decoding="async">
@@ -391,7 +391,7 @@ $static_menu = [
             <a href="tel:<?php echo esc_attr( $phone_tel ); ?>"
                class="sunpepe-landing__final-cta-btn"
                aria-label="חייגו אלינו: <?php echo esc_attr( $phone_display ); ?>">
-                <img src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.png' ); ?>"
+                <img src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/call-now-button.webp' ); ?>"
                      alt="התקשרו כעת"
                      class="sunpepe-landing__final-cta-img"
                      loading="lazy"
