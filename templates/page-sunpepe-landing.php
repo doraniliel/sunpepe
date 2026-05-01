@@ -186,14 +186,6 @@ $static_menu = [
 
             <!-- ── Pizza stage (CSS sticky on desktop) ──────────────────────── -->
             <div class="sunpepe-landing__animation-stage" aria-hidden="true">
-
-                <!-- Brand logo — large, in the right visual area of the opening scene -->
-                <img class="sp-brand-logo"
-                     src="<?php echo esc_url( SUNPEPE_PLUGIN_URL . 'assets/images/sunpepe-logo.png' ); ?>"
-                     alt="SUN PEPE"
-                     loading="eager"
-                     decoding="async">
-
                 <div class="sunpepe-landing__pizza-wrap">
 
                     <div class="sp-pizza-stack" role="img" aria-label="פיצה של SUN PEPE">
