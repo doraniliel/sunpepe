@@ -1011,24 +1011,23 @@
        mobile — lower opacity to avoid competing with text */
     .sp-bg-watermark { opacity: 0.09; }
 
-    /* Fixed CTA: sized by width (not height) so it can't overflow narrow screens.
-       Image is 3:1 — at min(85vw, 320px) wide, height ≈ 102–107px (~2.8× desktop).
-       Phone number hidden so the pill only contains the call image. */
+    /* Fixed CTA: sized by width so the 3:1 image can't overflow narrow screens.
+       200px wide → ~67px tall (~1.75× the 38px desktop size). */
     .sp-fixed-cta {
-        padding: 0.5rem 0.75rem;
+        padding: 0.4rem 0.6rem;
     }
     .sp-fixed-cta__phone {
         display: none;
     }
     .sp-fixed-cta__img {
-        width: min(85vw, 320px);
+        width: min(56vw, 200px);
         height: auto;
     }
 
-    /* Hero: raise top padding to clear the now-taller fixed CTA pill.
-       Pill bottom ≈ 134px from viewport top; 9.5rem (152px) gives ~18px gap. */
+    /* Hero: raise top padding to clear the taller fixed CTA pill.
+       Pill bottom ≈ 99px from viewport top; 8rem (128px) gives ~29px gap. */
     .sp-story-hero-panel {
-        padding-block-start: 9.5rem;
+        padding-block-start: 8rem;
     }
 }
 
